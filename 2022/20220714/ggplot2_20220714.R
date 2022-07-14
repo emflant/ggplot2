@@ -6,7 +6,9 @@ subway = read_excel(path = "~/github/ggplot2/2022/20220714/subway_202205.xlsx")
 holiday = tibble(date = c("2022-01-31", "2022-02-01", "2022-02-02", "2022-03-01", "2022-03-09", "2022-05-05")) %>% 
   mutate(date = ymd(date), code = "h")
 
-v_station_name = '여의도'
+# v_station_name = '서울역'
+# v_station_name = '여의도'
+v_station_name = '화곡'
 
 subway1 = subway %>% janitor::clean_names() 
 
@@ -51,9 +53,10 @@ subway2 = subway1 %>%
 ggplot(subway2,aes(x = times)) +
   geom_histogram(aes(fill = ..count..), alpha = 1, binwidth = 6) +
   scale_x_continuous(breaks = seq(6,24,6)) +
-  scale_fill_gradient(low = "#E7AB79", high = "#B25068") +
-  scale_fill_gradient(low = "#E7AB79", high = "#B25068") +
-  0078AA
+  # scale_fill_gradient(low = "#E7AB79", high = "#B25068") + #서울역
+  # scale_fill_gradient(low = "#B2C8DF", high = "#495C83") + # 여의도
+  scale_fill_gradient(low = "#98B4AA", high = "#596E79") + # 화곡
+  # scale_fill_gradient(low = "#889EAF", high = "#506D84") +
   facet_grid(week ~ wday) +
   labs(title = paste0("'22.5월 ", subway2 %>% pull(yeogmyeong) %>% head(1), " 하차인원 통계"),
        caption = "twitter @sourcebox7") +
@@ -75,7 +78,7 @@ ggplot(subway2,aes(x = times)) +
         plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA")) 
 
 
-ggsave(paste0("~/github/ggplot2/2022/20220714/result2_20220714.png"),
+ggsave(paste0("~/github/ggplot2/2022/20220714/result3_20220714.png"),
        width = 8, height = 6, dpi = 320, units = "in")
 
 
