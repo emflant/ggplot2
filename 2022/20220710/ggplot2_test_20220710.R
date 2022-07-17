@@ -71,6 +71,7 @@ ggplot(subway2,aes(x = times)) +
   scale_x_continuous(breaks = seq(6,24,6)) +
   scale_fill_gradient(low = v_low, high = v_high) +
   facet_grid(week ~ wday) +
+  labs(caption = "twitter @sourcebox7") +
   theme_minimal(base_family = "AppleSDGothicNeo-Bold", base_size = 10) +
   theme(panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
@@ -85,7 +86,7 @@ ggplot(subway2,aes(x = times)) +
                                     size = 6,
                                     margin = margin(.5,0,0,0,"cm")),
         plot.margin = margin(.7,1,.7,1,"cm"),
-        plot.background = element_rect(fill = "white", color = "white"))
+        plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA"))
 
 
 ggsave(paste0("~/github/ggplot2/2022/20220710/result_test_before_", v_file_seq, "_20220710.png"),
@@ -154,6 +155,7 @@ ggplot(subway2,aes(x = times)) +
   scale_y_continuous(position = "right") +
   scale_fill_gradient(low = v_low, high = v_high) +
   facet_grid(week ~ wday, switch = "y") +
+  labs(caption = "twitter @sourcebox7") +
   theme_minimal(base_family = "AppleSDGothicNeo-Bold", base_size = 10) +
   theme(panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
@@ -170,7 +172,7 @@ ggplot(subway2,aes(x = times)) +
                                     size = 6,
                                     margin = margin(.5,0,0,0,"cm")),
         plot.margin = margin(.7,1,.7,1,"cm"),
-        plot.background = element_rect(fill = "white", color = "white"))
+        plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA"))
 
 # after
 ggsave(paste0("~/github/ggplot2/2022/20220710/result_test_after_", v_file_seq, "_20220710.png"),
