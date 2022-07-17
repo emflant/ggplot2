@@ -1,16 +1,25 @@
+#  4개 종류의 스타일이 있어서, 1~4까지의 숫자로 임의 입력하면 된다.
+v_seq = 1
 
-# https://www.data.go.kr/data/15048032/fileData.do
-# subway = read_excel(path = "~/github/ggplot2/2022/20220714/subway_202205.xlsx")
 
-# 휴일정보
-holiday = tibble(date = c("2022-01-31", "2022-02-01", "2022-02-02", "2022-03-01", "2022-03-09", "2022-05-05")) %>% 
-  mutate(date = ymd(date), code = "h")
+
+# !exists("tb_input")
+if(!exists("tb_input")){
+  
+  # https://www.data.go.kr/data/15048032/fileData.do
+  subway = read_excel(path = "~/github/ggplot2/2022/20220710/subway_202205.xlsx")
+  
+  # 휴일정보
+  holiday = tibble(date = c("2022-01-31", "2022-02-01", "2022-02-02", "2022-03-01", "2022-03-09", "2022-05-05")) %>% 
+    mutate(date = ymd(date), code = "h")
+}
+
 
 tb_input = tibble(seq = 1:4,
-       station_name = c("서울역", "여의도", "화곡", "강남"),
-       low_colour = c("#E7AB79","#B2C8DF","#98B4AA","#889EAF"),
-       high_colour = c("#B25068","#495C83","#596E79","#506D84")) %>% 
-  filter(seq == 1)
+                  station_name = c("서울역", "여의도", "화곡", "강남"),
+                  low_colour = c("#E7AB79","#B2C8DF","#98B4AA","#889EAF"),
+                  high_colour = c("#B25068","#495C83","#596E79","#506D84")) %>% 
+  filter(seq == v_seq)
 
 
 
@@ -45,7 +54,7 @@ subway2 = subway1 %>%
   mutate(holiday = code=="h"|wday =="Sat"|wday == "Sun") %>% 
   mutate(holiday = !is.na(holiday)) %>% 
   select(-time, -value, -code) %>% 
-  print(n = 100)
+  print(n = 1)
 
 ###############################################################
 # subway2 %>% select(-value, -code) %>% 
@@ -59,18 +68,19 @@ subway2 = subway1 %>%
 #   theme(legend.position = "none",
 #         plot.margin = margin(1,1,1,1,"cm"))
 ###############################################################
-week_label
+
 week_label <- paste0('Week ', 18:22)
 names(week_label) <- 18:22
 
 ggplot(subway2,aes(x = times)) +
   geom_histogram(aes(fill = ..count..), alpha = 1, binwidth = 6) +
   scale_x_continuous(breaks = seq(6,24,6)) +
-  scale_y_continuous(position = "right") +
+  # scale_y_continuous(position = "right") +
   scale_fill_gradient(low = v_low, high = v_high) + 
   facet_grid(week ~ wday, 
-             switch = "y",
-             labeller = labeller(week = week_label)) +
+             # switch = "y",
+             labeller = labeller(week = week_label)
+             ) +
   labs(title = paste0("'22.5월 ", subway2 %>% pull(yeogmyeong) %>% head(1), " 지하철역 하차인원 통계"),
        caption = "twitter @sourcebox7") +
   theme_minimal(base_family = "AppleSDGothicNeo-Bold", base_size = 10) +
@@ -81,8 +91,8 @@ ggplot(subway2,aes(x = times)) +
         axis.title = element_blank(),
         plot.title = element_text(margin = margin(0,0,.5,0, "cm"),
                                   hjust = 0.5),
-        strip.text.y.left = element_text(angle = 0),
-        strip.placement = "outside",
+        # strip.text.y.left = element_text(angle = 0),
+        # strip.placement = "outside",
         plot.caption = element_text(color = "gray30", 
                                     family = "Menlo", 
                                     hjust = 1, 
@@ -92,7 +102,7 @@ ggplot(subway2,aes(x = times)) +
         plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA")) 
 
 
-ggsave(paste0("~/github/ggplot2/2022/20220714/result", v_file_seq, "_20220714.png"),
+ggsave(paste0("~/github/ggplot2/2022/20220710/result", v_file_seq, "_20220710.png"),
        width = 8, height = 6, dpi = 320, units = "in")
 
 
