@@ -177,6 +177,3 @@ ggplot(subway2,aes(x = times)) +
 # after
 ggsave(paste0("~/github/ggplot2/2022/20220710/result_test_after_", v_file_seq, "_20220710.png"),
        width = 8, height = 6, dpi = 320, units = "in")
-
-
-

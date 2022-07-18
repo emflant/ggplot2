@@ -1,7 +1,2 @@
-![](result_test_1_20220710.png)
-![](result_test_2_20220710.png)
-![](result_test_3_20220710.png)
-![](result_test_4_20220710.png)
-![](result_test_5_20220710.png)
 ![](result_test_before_1_20220710.png)
 ![](result_test_after_1_20220710.png)
