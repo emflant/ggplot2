@@ -14,9 +14,9 @@ rent_marin %>% head()
 ################################################################################
 
 
-g_col_1 = function(in_low, in_high, in_width = 0.9){
+g_col_1 = function(in_low, in_high){
   ggplot(rent_marin, aes(year, count, fill = count)) +
-    geom_col(width = in_width) +
+    geom_col(width = .5) +
     scale_fill_gradient(low = in_low, high = in_high) +
     scale_x_continuous(breaks = c(2000, 2012, 2018)) +
     scale_y_continuous(expand = expansion(c(0, 0.15))) +
@@ -34,10 +34,6 @@ g_col_1 = function(in_low, in_high, in_width = 0.9){
       plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA")
     )
 }
-
-g_col_1(in_low = "#C8C6C6", in_high = "#4B6587", in_width = 0.5)
-ggsave("~/github/ggplot2/2022/20220719/save_ggplot_col_0.png", 
-       width = 6, height = 4, dpi = 320, units = "in")
 
 g_col_1(in_low = "#C8C6C6", in_high = "#4B6587")
 ggsave("~/github/ggplot2/2022/20220719/save_ggplot_col_1.png", 
