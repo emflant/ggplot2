@@ -14,9 +14,9 @@ rent_marin %>% head()
 ################################################################################
 
 
-g_col_1 = function(in_low, in_high){
+g_col_1 = function(in_low, in_high, in_width = 0.9){
   ggplot(rent_marin, aes(year, count, fill = count)) +
-    geom_col(width = .5) +
+    geom_col(width = in_width) +
     scale_fill_gradient(low = in_low, high = in_high) +
     scale_x_continuous(breaks = c(2000, 2012, 2018)) +
     scale_y_continuous(expand = expansion(c(0, 0.15))) +
@@ -35,21 +35,19 @@ g_col_1 = function(in_low, in_high){
     )
 }
 
-# scale_fill_gradient(low = "#FFC4C4", high = "#A10035" ) +
-# scale_fill_gradient(low = "#E8F9FD", high = "#0AA1DD" ) +
-# scale_fill_gradient(low = "#85F4FF", high = "#42C2FF" ) +
-# scale_fill_gradient(low = "#C8C6C6", high = "#4B6587" ) +
-# scale_fill_gradient(low = "#FAD9A1", high = "#F37878" ) +
+g_col_1(in_low = "#C8C6C6", in_high = "#4B6587", in_width = 0.5)
+ggsave("~/github/ggplot2/2022/20220719/save_ggplot_col_0.png", 
+       width = 6, height = 4, dpi = 320, units = "in")
 
 g_col_1(in_low = "#C8C6C6", in_high = "#4B6587")
 ggsave("~/github/ggplot2/2022/20220719/save_ggplot_col_1.png", 
        width = 6, height = 4, dpi = 320, units = "in")
 
-g_col_1(in_low = "#E8F9FD", in_high = "#0AA1DD")
+g_col_1(in_low = "#B6D2D9", in_high = "#0AA1DD")
 ggsave("~/github/ggplot2/2022/20220719/save_ggplot_col_2.png", 
        width = 6, height = 4, dpi = 320, units = "in")
 
-g_col_1(in_low = "#C5F4FF", in_high = "#42C2FF")
+g_col_1(in_low = "#BBE1F2", in_high = "#42C2FF")
 ggsave("~/github/ggplot2/2022/20220719/save_ggplot_col_3.png", 
        width = 6, height = 4, dpi = 320, units = "in")
 
