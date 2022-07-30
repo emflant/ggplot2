@@ -64,7 +64,7 @@ g_baserate9 = function(in_colour, in_start_date, in_add_y_pos = 0.3){
              x = v_x, y = v_y) +
     theme_minimal(base_family = "AppleSDGothicNeo-Bold") +
     theme(legend.position = "none",
-          axis.text = element_text(colour = v_font_color, size = 12),
+          axis.text = element_text(colour = v_font_color, size = 14),
           axis.line.x = element_line(colour = v_font_color, size = 1),
           axis.text.x = element_text(margin = margin(0.1,0,0,0,"cm")),
           axis.ticks.x = element_line(color = rep(c(v_font_color, NA), length.out = length(x_breaks)),
