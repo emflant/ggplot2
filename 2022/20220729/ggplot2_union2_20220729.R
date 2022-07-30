@@ -88,9 +88,9 @@ AAAABB
 CCCCCC
 "
 
-g_baserate9("#DBD765", ymd("2018-11-30")) +
-  g_baserate9("#CD7378", ymd("2022-01-01")) +
-  g_baserate9("#7AADC8", ymd("2011-01-01"), 0.8) +
+g_baserate9("#DBD765", ymd("2018-11-30"), 0.5) +
+  g_baserate9("#CD7378", ymd("2022-01-01"), 0.5) +
+  g_baserate9("#7AADC8", ymd("2011-01-01"), 1) +
   plot_layout(design = layout) +
   plot_annotation(caption = "twitter @sourcebox7",
                   theme = theme(plot.caption = element_text(color = "gray80", 
@@ -102,7 +102,6 @@ g_baserate9("#DBD765", ymd("2018-11-30")) +
                                 plot.background = element_rect(fill = "#363847", color = NA)))
 
 
-
-ggsave("~/github/ggplot2/2022/20220729/save_ggplot_union_3x2.png", 
-       width = 12, height = 8, dpi = 320, units = "in")
+ggsave("~/github/ggplot2/2022/20220729/save_ggplot_union_16x9.png", 
+       width = 12, height = 6.75, dpi = 320, units = "in")
 
