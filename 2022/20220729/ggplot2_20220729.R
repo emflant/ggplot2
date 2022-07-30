@@ -5,8 +5,13 @@ library(lubridate)
 
 
 tb_baserate = read_excel("~/github/ggplot2/2022/20220729/The Bank of Korea Base Rate.xlsx")
+x_breaks = seq.Date(from = ymd("2019-01-01"), to = ymd("2023-01-01"), length.out = 9)
+x_label
+seq(1, 10, 2)
 
-
+x_label = as.character(year(x_breaks))
+x_label[seq(1, 10, 2)] = ""
+x_label
 
 tb_baserate1 = tb_baserate %>% 
   unite("년도", "변경일자", col = "date", sep = " ") %>% 
@@ -212,3 +217,6 @@ ggsave("~/github/ggplot2/2022/20220729/save_ggplot_22.png",
 g_baserate2("#7AADC8")
 ggsave("~/github/ggplot2/2022/20220729/save_ggplot_23.png", 
        width = 6, height = 4, dpi = 320, units = "in")
+
+
+
