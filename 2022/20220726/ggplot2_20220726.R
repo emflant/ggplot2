@@ -32,13 +32,40 @@ tb_covid_2207 = tb_covid2 %>% filter(date >= ymd('2022-07-26') - days(7-1))
 tb_covid_2207 = tb_covid2 %>% filter(date >= ymd('2022-07-26') - days(14-1))
 # tb_covid_2207 = tb_covid2 %>% filter(date >= ymd('2022-07-26') - months(1) + days(1))
 
-tb_covid_2207$total
+tb_covid_2207
 v_colors = c("#18587A", "#FC624D")
 v_colors = c("#827397", "#363062")
 v_colors = c("#396EB0", "#2E4C6D")
 v_colors = c("#95ADBE", "#574F7D")
 
 # seq(0, 200000, 25000)
+ggplot(tb_covid_2207, aes(date, total)) +
+  geom_col(width = 0.6)
+ggsave("~/github/ggplot2/2022/20220726/save_ggplot_11.png", 
+       width = 6, height = 4, dpi = 320, units = "in")
+
+ggplot(tb_covid_2207, aes(date, total)) +
+  geom_col(width = 0.6) +
+  scale_x_date(date_breaks = "1 days")
+ggsave("~/github/ggplot2/2022/20220726/save_ggplot_12.png", 
+       width = 6, height = 4, dpi = 320, units = "in")
+
+
+ggplot(tb_covid_2207, aes(date, total)) +
+  geom_col(width = 0.6) +
+  scale_x_date(date_labels = "%d(%a)", date_breaks = "1 days")
+ggsave("~/github/ggplot2/2022/20220726/save_ggplot_13.png", 
+       width = 6, height = 4, dpi = 320, units = "in")
+
+
+Sys.setlocale("LC_ALL", "ko_KR.UTF-8")
+ggplot(tb_covid_2207, aes(date, total)) +
+  geom_col(width = 0.6) +
+  scale_x_date(date_labels = "%d(%a)", date_breaks = "1 days") +
+  theme_minimal(base_family = "AppleSDGothicNeo-Bold")
+ggsave("~/github/ggplot2/2022/20220726/save_ggplot_14.png", 
+       width = 6, height = 4, dpi = 320, units = "in")
+
 
 g_covid = function(in_colors = c("#18587A", "#FC624D")){
   ggplot(tb_covid_2207, aes(date, total)) +
