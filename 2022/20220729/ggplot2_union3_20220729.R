@@ -51,17 +51,17 @@ g_baserate9 = function(in_colour, in_start_date, in_add_y_pos = 0.3){
     # annotate("rect", xmin = ymd("2022-03-13"), xmax = ymd("2022-11-13"),
     #          ymin = 2.4, ymax = 2.8, fill = v_background_color) +
     annotate("label", x = v_x, y = v_y + in_add_y_pos, 
-             label.size = 1, label.padding = unit(2, "mm"),
+             label.size = .5, label.padding = unit(2, "mm"),
              fill = v_background_color,
              label = paste0(v_y, "%"),
-             family = "AppleSDGothicNeo-Bold", size = 7, colour = v_font_color) +
+             family = "AppleSDGothicNeo-Bold", size = 4, colour = v_font_color) +
     annotate("point", size = 3.5, colour = in_colour,
              x = v_x, y = v_y) +
     annotate("point", size = 1.5, colour = v_background_color,
              x = v_x, y = v_y) +
     theme_minimal(base_family = "AppleSDGothicNeo-Bold") +
     theme(legend.position = "none",
-          axis.text = element_text(colour = v_font_color, size = 14),
+          axis.text = element_text(colour = v_font_color, size = 8),
           axis.line.x = element_line(colour = v_font_color, size = 1),
           axis.text.x = element_text(margin = margin(0.1,0,0,0,"cm")),
           axis.ticks.x = element_line(color = rep(c(v_font_color, NA), length.out = length(x_breaks)),
@@ -71,7 +71,7 @@ g_baserate9 = function(in_colour, in_start_date, in_add_y_pos = 0.3){
           panel.grid = element_blank(),
           panel.grid.major.y = element_line(size = .3, colour = v_font_color, 
                                             linetype = "dotted"),
-          plot.margin = margin(1,1,1,1, "cm"),
+          plot.margin = margin(0.2,0.2,0.2,0.2, "in"),
           plot.background = element_rect(fill = v_background_color, color = v_background_color))
 }
 #363847  background
@@ -87,18 +87,44 @@ CCCCCC
 
 g_baserate9("#DBD765", ymd("2018-11-30"), 0.5) +
   g_baserate9("#CD7378", ymd("2022-01-01"), 0.5) +
-  g_baserate9("#7AADC8", ymd("2011-01-01"), 1) +
+  g_baserate9("#7AADC8", ymd("2011-01-01"), 1.2) +
   plot_layout(design = layout) +
   plot_annotation(caption = "twitter @sourcebox7",
                   theme = theme(plot.caption = element_text(color = "gray80", 
                                                             family = "Menlo", 
                                                             hjust = 1, 
-                                                            size = 12,
+                                                            size = 8,
                                                             margin = margin(0,0,0,0,"cm")),
-                                plot.margin = margin(1,1,1,1,"cm"),
+                                plot.margin = margin(0.3,0.3,0.3,0.3,"in"),
                                 plot.background = element_rect(fill = "#363847", color = NA)))
 
 # 16:9 = 8:4.5
-ggsave("~/github/ggplot2/2022/20220729/save_ggplot_union_16x9.png", 
-       width = 12, height = 6.75, dpi = 320, units = "in")
+ggsave("~/github/ggplot2/2022/20220729/save_ggplot_union3_16x9.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")
+
+
+
+layout <- "
+AAAABB
+AAAABB
+CCCCCC
+"
+
+g_baserate9("#DBD765", ymd("2018-11-30"), 0.3) +
+  g_baserate9("#CD7378", ymd("2022-01-01"), 0.3) +
+  g_baserate9("#7AADC8", ymd("2011-01-01"), 0.8) +
+  plot_layout(design = layout) +
+  plot_annotation(caption = "twitter @sourcebox7",
+                  theme = theme(plot.caption = element_text(color = "gray80", 
+                                                            family = "Menlo", 
+                                                            hjust = 1, 
+                                                            size = 8,
+                                                            margin = margin(0,0,0,0,"cm")),
+                                plot.margin = margin(0.3,0.3,0.3,0.3,"in"),
+                                plot.background = element_rect(fill = "#363847", color = NA)))
+
+# 4:3 = 8:6
+ggsave("~/github/ggplot2/2022/20220729/save_ggplot_union3_4x3.png", 
+       width = 8, height = 6, dpi = 320, units = "in")
+# 6:1920 = x : 1600
 
