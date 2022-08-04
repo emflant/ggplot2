@@ -60,7 +60,46 @@ tb_car_accident5
 # v_palette = "RdPu"
 v_palette = "OrRd"
 
+tb_car_accident6 = tb_car_accident5 %>% filter(age_type2 != "41-60세")
+
 ####################################
+in_palette = "RdPu"
+v_background_color = "gray100"
+ggplot(tb_car_accident6, aes(x = 1, y = death, fill = gender)) +
+  geom_col(position = "fill") +
+  facet_wrap(~ age_type2, ncol = 3) +
+  scale_x_continuous(limits = c(-4,1.5)) +
+  scale_fill_brewer(palette = in_palette) +
+  coord_polar(theta = "y") +
+  theme_void() +
+  theme(legend.position = "none",
+        strip.text = element_blank(),
+        plot.background = element_rect(fill = v_background_color, color = v_background_color))
+
+
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_blog_01.png", 
+       width = 8, height = 3, dpi = 320, units = "in")
+
+ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
+  geom_col(position = "fill") +
+  scale_fill_brewer(palette = in_palette) +
+  theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+  theme(legend.position = "none",
+        plot.background = element_rect(fill = v_background_color, color = v_background_color))
+
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_blog_02.png", 
+       width = 8, height = 4, dpi = 320, units = "in")
+
+
+ggplot(tb_car_accident3, aes(x = age_type, y = death, group = gender, fill = gender)) +
+  geom_area() +
+  scale_fill_brewer(palette = in_palette) +
+  theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+  theme(legend.position = "none",
+        plot.background = element_rect(fill = v_background_color, color = v_background_color))
+
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_blog_03.png", 
+       width = 8, height = 4, dpi = 320, units = "in")
 
 plot_union = function(in_palette){
   

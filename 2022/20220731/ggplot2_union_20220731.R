@@ -64,6 +64,8 @@ v_palette = "OrRd"
 
 plot_union = function(in_palette){
   
+  v_background_color = "gray100"  #F1F0EA  #363847
+  
   g1 = ggplot(tb_car_accident5, aes(x = 1, y = death, fill = gender)) +
     geom_col(position = "fill") +
     facet_wrap(~ age_type2, ncol = 4) +
@@ -118,7 +120,7 @@ BBBCCC
                                                               hjust = .95, 
                                                               size = 8,
                                                               margin = margin(0.1,0,0,0,"in")),
-                                  plot.margin = margin(0.3,0.3,0.3,0.3,"in"),
+                                  plot.margin = margin(0.0,0.3,0.3,0.3,"in"),
                                   plot.background = element_rect(fill = v_background_color, color = NA)))
   
 }
@@ -140,4 +142,15 @@ ggsave("~/github/ggplot2/2022/20220731/save_ggplot_4x3_Greys.png",
 plot_union("Purples")
 ggsave("~/github/ggplot2/2022/20220731/save_ggplot_4x3_Purples.png", 
        width = 8, height = 6, dpi = 320, units = "in")
+
+
+
+
+plot_union("Blues")
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_2x1_Blues.png", 
+       width = 8, height = 4, dpi = 320, units = "in")
+
+plot_union("RdPu")
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_2x1_RdPu.png", 
+       width = 8, height = 4, dpi = 320, units = "in")
 
