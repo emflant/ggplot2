@@ -162,21 +162,166 @@ BBBCCC
   
 }
 
-plot_union("RdPu")
-ggsave("~/github/ggplot2/2022/20220731/save_ggplot_4x3_RdPu.png", 
-       width = 8, height = 6, dpi = 320, units = "in")
+
 
 
 plot_union("Blues")
-ggsave("~/github/ggplot2/2022/20220731/save_ggplot_4x3_Blues.png", 
-       width = 8, height = 6, dpi = 320, units = "in")
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_2x1_Blues.png", 
+       width = 8, height = 4, dpi = 320, units = "in")
+
+plot_union("RdPu")
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_2x1_RdPu.png", 
+       width = 8, height = 4, dpi = 320, units = "in")
 
 
-plot_union("Greys")
-ggsave("~/github/ggplot2/2022/20220731/save_ggplot_4x3_Greys.png", 
-       width = 8, height = 6, dpi = 320, units = "in")
 
-plot_union("Purples")
-ggsave("~/github/ggplot2/2022/20220731/save_ggplot_4x3_Purples.png", 
-       width = 8, height = 6, dpi = 320, units = "in")
+tb_car_accident5
 
+
+plot_union2 = function(in_palette){
+  
+  tb_car_accident6 = tb_car_accident5 %>% head(4)
+  tb_car_accident6
+  g1 = ggplot(tb_car_accident6, aes(x = 1, y = death, fill = gender)) +
+    geom_col(position = "fill") +
+    facet_wrap(~ age_type2, ncol = 4) +
+    scale_x_continuous(limits = c(-4,1.5)) +
+    scale_fill_brewer(palette = in_palette) +
+    coord_polar(theta = "y") +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          # strip.text = element_text(margin = margin(0.2,0,0.05,0,"in")),
+          strip.text = element_blank(),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+  
+  
+  
+  ####################################3
+  
+  g2 = ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
+    geom_col(position = "fill") +
+    scale_fill_brewer(palette = in_palette) +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          plot.margin = margin(0,0,0.3,0,"in"),
+          # axis.text.x = element_text(),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+  
+  #######################################################
+  
+  
+  g3 = ggplot(tb_car_accident3, aes(x = age_type, y = death, group = gender, fill = gender)) +
+    geom_area() +
+    scale_fill_brewer(palette = in_palette) +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          # axis.text.x = element_text(),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+  
+  
+  layout <- "
+BBBBBB
+BBBBBB
+AAACCC
+AAACCC
+"
+  
+  
+  
+  # v_palette = "RdPu"
+  g1 + g2 + g3 +
+    plot_layout(design = layout) +
+    plot_annotation(caption = "twitter @sourcebox7",
+                    theme = theme(plot.caption = element_text(color = "gray30", 
+                                                              family = "Menlo", 
+                                                              hjust = .95, 
+                                                              size = 8,
+                                                              margin = margin(0.1,0,0,0,"in")),
+                                  plot.margin = margin(0.3,0.3,0.3,0.3,"in"),
+                                  plot.background = element_rect(fill = v_background_color, color = NA)))
+  
+}
+
+
+plot_union2("Blues")
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_Blues_02.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")
+
+
+
+
+
+plot_union3 = function(in_palette){
+  
+  tb_car_accident6 = tb_car_accident5 %>% head(4)
+  tb_car_accident6
+  g1 = ggplot(tb_car_accident6, aes(x = 1, y = death, fill = gender)) +
+    geom_col(position = "fill") +
+    facet_wrap(~ age_type2, ncol = 4) +
+    scale_x_continuous(limits = c(-4,1.5)) +
+    scale_fill_brewer(palette = in_palette) +
+    coord_polar(theta = "y") +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          # strip.text = element_text(margin = margin(0.2,0,0.05,0,"in")),
+          strip.text = element_blank(),
+          panel.spacing.x = unit(0.1, "in"),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+  
+  
+  
+  ####################################3
+  
+  g2 = ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
+    geom_col(position = "fill") +
+    scale_fill_brewer(palette = in_palette) +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          plot.margin = margin(0,0,0,0,"in"),
+          # axis.text.x = element_text(),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+  
+  #######################################################
+  
+  
+  g3 = ggplot(tb_car_accident3, aes(x = age_type, y = death, group = gender, fill = gender)) +
+    geom_area() +
+    scale_x_discrete(expand = expansion(c(0.01,0.01))) +
+    scale_y_continuous(expand = expansion(c(0.02,0.05))) +
+    scale_fill_brewer(palette = in_palette) +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          plot.margin = margin(0,0,0,0.1,"in"),
+          # axis.text.x = element_text(),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+  
+  
+  layout <- "
+AAACCC
+AAACCC
+AAACCC
+BBBCCC
+BBBCCC
+"
+  
+  
+  
+  # v_palette = "RdPu"
+  g1 + g2 + g3 +
+    plot_layout(design = layout) +
+    plot_annotation(caption = "twitter @sourcebox7",
+                    theme = theme(plot.caption = element_text(color = "gray30", 
+                                                              family = "Menlo", 
+                                                              hjust = .99, 
+                                                              size = 8,
+                                                              margin = margin(0.1,0,0,0,"in")),
+                                  plot.margin = margin(0.3,0.3,0.3,0.3,"in"),
+                                  plot.background = element_rect(fill = v_background_color, color = NA)))
+  
+}
+
+
+
+plot_union3("Purples")
+ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_Purples_03.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")

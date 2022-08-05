@@ -1,3 +1,5 @@
+![](save_ggplot_16x9_Purples_03.png)
+![](save_ggplot_16x9_Blues_02.png)
 ![](save_ggplot_4x3_Blues.png)
 ![](save_ggplot_4x3_Greys.png)
 ![](save_ggplot_4x3_Purples.png)
