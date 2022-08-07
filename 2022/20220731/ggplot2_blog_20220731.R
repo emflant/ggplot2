@@ -31,17 +31,12 @@ tb_car_accident3 = tb_car_accident1 %>%
   mutate(label = paste0(round(rate, 2), "%"))
   # mutate(label = ifelse(gender == "여", paste0(rate, "%"), NA))
 tb_car_accident3
-ggplot(tb_car_accident3, aes(x = 1, y = death, fill = gender)) +
-  geom_col(position = "fill") +
-  facet_wrap(~ age_type)
-tb_car_accident3
-
 
 v_background_color = "gray100"  #F1F0EA  #363847
 
 
 ################################################################################
-tb_car_accident4
+# tb_car_accident4
 tb_car_accident4 = tb_car_accident1 %>% 
   filter(death > 0) %>% 
   add_column(age_type2 = rep(c("20세이하", "21-40세", "41-60세", "61세이상"), each = 4))
@@ -325,3 +320,13 @@ BBBCCC
 plot_union3("Purples")
 ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_Purples_03.png", 
        width = 8, height = 4.5, dpi = 320, units = "in")
+
+
+ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
+  geom_col(position = "fill") +
+  scale_fill_brewer(palette = "Purples", direction = -1) +
+  theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+  theme(legend.position = "none",
+        plot.margin = margin(0,0,0,0,"in"),
+        # axis.text.x = element_text(),
+        plot.background = element_rect(fill = v_background_color, color = v_background_color))
