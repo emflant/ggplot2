@@ -1,0 +1,84 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    fig_mobile: False
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+source("./tidy_data.R")  
+
+in_palette = "Blues"
+v_background_color = "gray100"
+```
+
+
+Inputs {.sidebar data-width=200}
+-----------------------------------------------------------------------
+```{r}
+selectInput(
+  "in_palette", label = "color:",
+  choices = c("Blues", "Purples", "RdPu", "Greys"), selected = "Blues"
+)
+```
+
+
+Row
+-------------------------------------
+
+### Chart A
+
+```{r,fig.width=8,fig.height=2, fig.retina=2}
+renderPlot({
+  ggplot(tb_car_accident5, aes(x = 1, y = death, fill = gender)) +
+    geom_col(position = "fill") +
+    facet_wrap(~ age_type2, ncol = 4) +
+    scale_x_continuous(limits = c(-4,1.5)) +
+    scale_fill_brewer(palette = input$in_palette) +
+    coord_polar(theta = "y") +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          # strip.text = element_text(margin = margin(0.2,0,0.05,0,"in")),
+          strip.text = element_blank(),
+          plot.margin = margin(0,0,0,0,"in"),
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+})
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r,fig.width=8,fig.height=4, fig.retina=2}
+renderPlot({
+  ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
+    geom_col(position = "fill") +
+    scale_fill_brewer(palette = input$in_palette) +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))  
+})
+
+```
+
+
+
+### Chart C
+
+```{r,fig.width=8,fig.height=4, fig.retina=2}
+renderPlot({
+  ggplot(tb_car_accident3, aes(x = age_type, y = death, group = gender, fill = gender)) +
+    geom_area() +
+    scale_fill_brewer(palette = input$in_palette) +
+    theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = v_background_color, color = v_background_color))
+})
+```
+
