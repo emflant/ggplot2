@@ -71,7 +71,7 @@ ggplot(tb_car_accident6, aes(x = 1, y = death, fill = gender)) +
         strip.text = element_blank(),
         plot.background = element_rect(fill = v_background_color, color = v_background_color))
 
-
+flex_dashboard()
 ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_blog_01.png", 
        width = 8, height = 3, dpi = 320, units = "in")
 
@@ -320,13 +320,17 @@ BBBCCC
 plot_union3("Purples")
 ggsave("~/github/ggplot2/2022/20220731/save_ggplot_16x9_Purples_03.png", 
        width = 8, height = 4.5, dpi = 320, units = "in")
-
-
-ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
+# install.packages("plotly")
+library(plotly)
+g1 = ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
   geom_col(position = "fill") +
   scale_fill_brewer(palette = "Purples", direction = -1) +
   theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
   theme(legend.position = "none",
         plot.margin = margin(0,0,0,0,"in"),
         # axis.text.x = element_text(),
+        axis.line = element_blank(),
+        axis.text = element_blank(),
         plot.background = element_rect(fill = v_background_color, color = v_background_color))
+
+ggplotly(g1)

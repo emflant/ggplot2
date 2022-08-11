@@ -3,8 +3,7 @@ title: "Untitled"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
-    # fig_mobile: c(10,20)
-    
+    fig_mobile: False
 runtime: shiny
 ---
 
@@ -20,7 +19,7 @@ v_background_color = "gray100"
 
 Inputs {.sidebar data-width=200}
 -----------------------------------------------------------------------
-```{r,fig.width=8,fig.height=3}
+```{r}
 selectInput(
   "in_palette", label = "color:",
   choices = c("Blues", "Purples", "RdPu", "Greys"), selected = "Blues"
@@ -33,9 +32,8 @@ Row
 
 ### Chart A
 
-```{r,fig.width=8,fig.height=3, fig.retina=2}
-v_margin_1 = 0.2
-renderPlot({
+```{r, out.width="100%", out.height="100%"}
+renderImage({
   ggplot(tb_car_accident5, aes(x = 1, y = death, fill = gender)) +
     geom_col(position = "fill") +
     facet_wrap(~ age_type2, ncol = 4) +
@@ -46,9 +44,14 @@ renderPlot({
     theme(legend.position = "none",
           # strip.text = element_text(margin = margin(0.2,0,0.05,0,"in")),
           strip.text = element_blank(),
-          plot.margin = margin(v_margin_1,v_margin_1,v_margin_1,v_margin_1,"in"),
+          plot.margin = margin(0,0,0,0,"in"),
           plot.background = element_rect(fill = v_background_color, color = v_background_color))
-})
+  
+  outfile <- tempfile(fileext='.png')
+  ggsave(outfile, width = 8, height = 3, dpi = 320, units = "in")
+  list(src = outfile)
+}, deleteFile = TRUE)
+
 ```
 
 
@@ -57,15 +60,13 @@ Row
 
 ### Chart B
 
-```{r,fig.width=8,fig.height=3, fig.retina=2}
-v_margin_2 = 0.2
+```{r,fig.width=8,fig.height=4, fig.retina=2}
 renderPlot({
   ggplot(tb_car_accident3, aes(x = age_type, y = death, fill = gender)) +
     geom_col(position = "fill") +
     scale_fill_brewer(palette = input$in_palette) +
     theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
     theme(legend.position = "none",
-          plot.margin = margin(v_margin_2,v_margin_2,v_margin_2,v_margin_2,"in"),
           plot.background = element_rect(fill = v_background_color, color = v_background_color))  
 })
 
@@ -75,16 +76,14 @@ renderPlot({
 
 ### Chart C
 
-```{r,fig.width=8,fig.height=3, fig.retina=2}
+```{r,fig.width=8,fig.height=4, fig.retina=2}
 renderPlot({
   ggplot(tb_car_accident3, aes(x = age_type, y = death, group = gender, fill = gender)) +
     geom_area() +
-    scale_x_discrete(expand = expansion(c(0.02,0.02))) +
     scale_fill_brewer(palette = input$in_palette) +
     theme_void(base_family = "AppleSDGothicNeo-Bold", base_size = 15) +
     theme(legend.position = "none",
-          plot.margin = margin(v_margin_2,v_margin_2,v_margin_2,v_margin_2,"in"),
           plot.background = element_rect(fill = v_background_color, color = v_background_color))
-}, outputArgs = list(height = "10px"))
+})
 ```
 
