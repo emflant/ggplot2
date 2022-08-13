@@ -2,3 +2,4 @@
 ![](/2022/20220718/save_ggplot_histogram_union.png)
 ![](/2022/20220729/save_ggplot_union3_4x3.png)
 ![](/2022/20220731/save_ggplot_4x3_RdPu.png)
+![](/2022/20220812/save_ggplot_2x1_01.png)
