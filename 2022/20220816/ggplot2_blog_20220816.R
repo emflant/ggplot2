@@ -5,29 +5,52 @@ library(lubridate)
 library(ggchicklet)
 
 
-tibble(x = rep(1,10), y = rep(1,10))
+tibble(x = rep(1,10), y = rep(1,10), z = 1:10)
 
 tibble(x = rep(1,10), y = rep(1,10), z = 1:10) %>% 
   ggplot(aes(x,y, fill = z)) +
   geom_col(color = "gray100")
 
+ggsave("~/github/ggplot2/2022/20220816/save_ggplot_blog_01.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")
 
-tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:10, 3))
-tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:10, 3)) %>% 
+# tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:10, 3))
+# tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:3, each = 10))
+tibble(x = rep(1:3, each = 10), 
+       y = rep(1,30), 
+       z = rep(1:3, each = 10)) %>% 
   ggplot(aes(x, y, fill = z)) +
-  geom_col(color = "gray100")
+  geom_col(color = "gray100", width = 1)
+
+ggsave("~/github/ggplot2/2022/20220816/save_ggplot_blog_02.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")
+
+
+
+# tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:10, 3))
+# tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:3, each = 10))
+# tibble(x = rep(1:3, each = 10), y = rep(1,30), z = rep(1:3, each = 10)) %>% 
+#   ggplot(aes(x, y, fill = z)) +
+#   geom_col(color = "gray100", width = 1)
 
 
 v_size = 10
 
-tibble(x = rep(1:v_size, each = 10), y = rep(1,v_size*10), z = rep(1:10, v_size)) %>% 
+tibble(x = rep(1:10, each = 10), 
+       y = rep(1,100), 
+       z = rep(1:10, each = 10)) %>% 
   ggplot(aes(x, y, fill = z)) +
-  geom_col(color = "gray100", width = 0.95)
+  geom_col(color = "gray100", width = 1) +
+  theme(aspect.ratio = 1)
+
+ggsave("~/github/ggplot2/2022/20220816/save_ggplot_blog_03.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")
 
 v_background_color = "gray100"
 
 #  x좌표임. 1,1,1,...2,2,2,...10,10,10 총 100개
 # 1.1.1.1.1.... 1.1.1.1.1.1.1 총 100개 
+v_background_color = "gray100"
 
 tibble(x = rep(1:v_size, each = 10), 
        y = rep(1,v_size*10), 
@@ -36,17 +59,18 @@ tibble(x = rep(1:v_size, each = 10),
 tibble(x = rep(1:v_size, each = 10), 
        y = rep(1,v_size*10), 
        z = c(rep("a", 32), rep("b", 45), rep("c", 23))) %>% 
-  ggplot(aes(x,y, fill = factor(z, levels = c("c", "b", "a")))) +
+  ggplot(aes(x,y, fill = z)) +
   geom_col(color = "gray100", size = 1, width = 1) +
-  scale_fill_brewer(palette = "PuRd") +
+  # scale_fill_brewer(palette = "Blues") +
+  scale_x_reverse() +
   coord_flip() +
   theme_void() +
-  theme(legend.position = "none", aspect.ratio = 1,
+  theme(aspect.ratio = 1,
         plot.background = element_rect(fill = v_background_color, color = v_background_color))
-  
 
-ggsave("~/github/ggplot2/2022/20220816/save_ggplot_4x3_01.png", 
-       width = 8, height = 6, dpi = 320, units = "in")
+
+ggsave("~/github/ggplot2/2022/20220816/save_ggplot_blog_04.png", 
+       width = 8, height = 4.5, dpi = 320, units = "in")
 
 
 
@@ -101,12 +125,12 @@ tb1 = tibble(v1 = sample(1:100, v_plot_count, replace = T)) %>%
   print(n = 5)
 
 
-v_background_color = "#F1F0EA"
-v_background_color = "gray100"
+v_background_color = "black"
+v_background_color = "#282A36" #282A36
 # , levels = c("c", "b", "a")
 ggplot(tb1,aes(x,y, fill = factor(z))) +
   geom_col(color = v_background_color, size = 1, width = 1) +
-  scale_fill_brewer(palette = "YlGnBu") +
+  scale_fill_brewer(palette = "Spectral") +
   scale_x_reverse() +
   coord_flip() +
   facet_wrap(~g) +
@@ -117,14 +141,14 @@ ggplot(tb1,aes(x,y, fill = factor(z))) +
         strip.text = element_blank(),
         legend.title =element_blank(), 
         plot.margin = margin(0.5,0.1,0.1,0.1, "in"),
-        plot.caption = element_text(color = "gray0", 
+        plot.caption = element_text(color = "gray70", 
                                     family = "Menlo", 
                                     hjust = 0.98, 
                                     size = 10,
                                     margin = margin(0.1,0,0.3,0,"in")),
         plot.background = element_rect(fill = v_background_color, color = v_background_color))
 
-ggsave("~/github/ggplot2/2022/20220816/save_ggplot_4x3_YlGnBu.png", 
+ggsave("~/github/ggplot2/2022/20220816/save_ggplot_blog_16x13_Spectral.png", 
        width = 8, height = 6.5, dpi = 320, units = "in")
 
 
