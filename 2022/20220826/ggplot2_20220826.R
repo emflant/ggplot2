@@ -36,13 +36,14 @@ ggplot(tb1, aes(x,y, fill= factor(x))) +
 
 #E2071B #41E000 #00F0D3
 ggsave("~/github/ggplot2/2022/20220826/save_ggplot_01.png", 
-       width = 8, height = 6, dpi = 320, units = "in", bg = v_background_color) 
-
+       width = 8, height = 6, dpi = 240, units = "in", bg = v_background_color) 
+1920/8
 #############################################3
 
 
 v_point_size = 4.2
 v_background_color = "#334960"
+
 
 tb2 = expand.grid(g = 1:6, x = 1:4) %>% 
   as_tibble() %>% 
@@ -87,5 +88,5 @@ ggplot(tb2, aes(x,y, fill= factor(x))) +
 
 #E2071B #41E000 #00F0D3
 ggsave("~/github/ggplot2/2022/20220826/save_ggplot_02.png", 
-       width = 8, height = 6, dpi = 200, units = "in", bg = v_background_color) 
+       width = 8, height = 6, dpi = 240, units = "in", bg = v_background_color) 
 
