@@ -6,7 +6,7 @@ library(ggchicklet)
 library(treemapify)
 
 v_background_color = "#334960" #2E5E77 #2D4A62 #334960 #28384E 
-v_font_color = c("gray100","#334960","#334960","#334960","#334960")
+v_font_color = c("gray90","#334960","#334960","#334960","gray90")
 
 g1 = tibble(x = 1:5, y = c(75, 64, 114, 36, 38),
        a = c(1,1,1,0,1)) %>% 
@@ -28,7 +28,7 @@ g1 = tibble(x = 1:5, y = c(75, 64, 114, 36, 38),
 g2 = tibble(w = c(2,4,1,2,1),
        h = rep(1,5),
        y = c(1.4,1,1,1,1),
-       a = c(0.03,-0.06,0,0,0)) %>% 
+       a = c(0.03,-0.06,0,0,0.04)) %>% 
   mutate(w1 = cumsum(w)) %>% 
   mutate(w2 = lag(w1, 1, default = 0)) %>% 
   mutate(x = w / 2 + w2) %>% 
@@ -39,7 +39,7 @@ g2 = tibble(w = c(2,4,1,2,1),
   geom_text(aes(x,y + a), label = LETTERS[1:5],
             family = "BMJUAOTF", size = 7,
             colour = v_font_color) +
-  ylim(c(-2, 2)) +
+  ylim(c(-1.5, 2)) +
   coord_polar(theta = "x") +
   scale_fill_brewer(palette = "RdYlBu", direction = -1) +
   
@@ -74,5 +74,5 @@ plot_spacer() +
 
 
 ggsave("~/github/ggplot2/2022/20220824/save_ggplot_union_04.png", 
-       width = 8, height = 4.5, dpi = 320, units = "in", bg = v_background_color) 
+       width = 8, height = 4.5, dpi = 240, units = "in", bg = v_background_color) 
 

@@ -5,7 +5,10 @@ library(lubridate)
 library(ggchicklet)
 library(treemapify)
 
-v_background_color = "#334960" #2E5E77 #2D4A62 #334960 #28384E 
+v_background_color = "#2D4A62" #2E5E77 #2D4A62 #334960 #28384E 
+v_font_color = c("gray90","#334960","#334960","#334960","gray90")
+v_palette = "RdBu"
+v_direction = -1
 
 g1 = tibble(x = 1:5, y = c(75, 64, 114, 36, 38),
        a = c(1,1,1,0,1)) %>% 
@@ -16,22 +19,18 @@ g1 = tibble(x = 1:5, y = c(75, 64, 114, 36, 38),
   geom_col(aes(x,y = 30), width = 1, fill = v_background_color) +
   geom_text(aes(x, y/10 + 30 + a), label = LETTERS[1:5],
              family = "BMJUAOTF", size = 7,
-             color = "gray100") +
+             color = v_font_color) +
   coord_polar(theta = "x") +
   # "#9F9EBF", "#7070A2"
-  # scale_fill_manual(values = c("#9F9EBF", "#9F9EBF", "#7070A2", "#9F9EBF", "#9F9EBF")) +
-  scale_fill_manual(values = c("#7070A2", "#7070A2", "#7F60BF", "#7070A2", "#7070A2")) +
-  # scale_fill_manual(values = c("#7070A2", "#7070A2", "#7b59b3", "#7070A2", "#7070A2")) +
-  # scale_fill_manual(values = c("#7b59b3", "#7b59b3", "#A67EE2", "#7b59b3", "#7b59b3")) +
-  # scale_fill_manual(values = c("#A67EE2", "#A67EE2", "#7b59b3", "#A67EE2", "#A67EE2")) +
+  scale_fill_brewer(palette = v_palette, direction = v_direction) +
   theme_void(base_family = "BMJUAOTF") +
   theme(legend.position = "none")
 
 # g1
-g2 = tibble(w = c(1,4),
-       h = rep(1,2),
-       y = c(1.4,1),
-       a = c(0.03,-0.06)) %>% 
+g2 = tibble(w = c(2,4,1,2,1),
+       h = rep(1,5),
+       y = c(1.4,1,1,1,1),
+       a = c(0.03,-0.06,0,0,0.04)) %>% 
   mutate(w1 = cumsum(w)) %>% 
   mutate(w2 = lag(w1, 1, default = 0)) %>% 
   mutate(x = w / 2 + w2) %>% 
@@ -39,19 +38,12 @@ g2 = tibble(w = c(1,4),
              width = w, height = h,
              fill = factor(x))) +
   geom_tile(size = 3, colour = v_background_color) +
-  geom_text(aes(x,y + a), label = LETTERS[1:2],
+  geom_text(aes(x,y + a), label = LETTERS[1:5],
             family = "BMJUAOTF", size = 7,
-            colour = "gray100") +
-  ylim(c(-2, 2)) +
+            colour = v_font_color) +
+  ylim(c(-1.5, 2)) +
   coord_polar(theta = "x") +
-  # "#A67EE2", "#7b59b3"
-  # "#9F9EBF", "#7070A2"
-  # "#9F9EBF", "#7070A2"
-  scale_fill_manual(values = c("#7F60BF", "#7070A2")) +
-  # scale_fill_manual(values = c("#7070A2", "#9F9EBF")) +
-  # scale_fill_manual(values = c("#7b59b3", "#7070A2")) +
-  # scale_fill_manual(values = c("#A67EE2", "#7b59b3")) +
-  # scale_fill_manual(values = c("#7b59b3", "#A67EE2")) +
+  scale_fill_brewer(palette = v_palette, direction = v_direction) +
   
   theme_void() +
   theme(legend.position = "none")
@@ -79,10 +71,10 @@ plot_spacer() +
                                                             size = 10,
                                                             margin = margin(-0.3,0,0.3,0,"in")),
                                 plot.margin = margin(0,0,0,0,"in"),
-                                plot.background = element_rect(fill = NA, color = NA)
+                                plot.background = element_rect(fill = v_background_color, color = NA)
                                 ))
 
 
-ggsave("~/github/ggplot2/2022/20220824/save_ggplot_union_03.png", 
+ggsave("~/github/ggplot2/2022/20220824/save_ggplot_union_05.png", 
        width = 8, height = 4.5, dpi = 240, units = "in", bg = v_background_color) 
 
