@@ -5,7 +5,7 @@ library(lubridate)
 library(ggchicklet)
 library(treemapify)
 
-v_background_color = "#2D4A62" #2E5E77 #2D4A62 #334960 #28384E 
+v_background_color = "#334960" #2E5E77 #2D4A62 #334960 #28384E 
 v_font_color = c("gray90","#334960","#334960","#334960","gray90")
 v_palette = "RdBu"
 v_direction = -1

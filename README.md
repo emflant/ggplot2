@@ -6,8 +6,8 @@
 ![](/2022/20220816/save_ggplot_4x3_YlGnBu.png)
 ![](/2022/20220819/save_ggplot_2x1_01.png)
 ![](/2022/20220822/save_ggplot_01.png)
-![](/2022/20220823/save_ggplot_01.png)
-![](/2022/20220824/save_ggplot_union_04.png)
+![](/2022/20220823/save_ggplot_02.png)
+![](/2022/20220824/save_ggplot_union_05.png)
 ![](/2022/20220826/save_ggplot_02.png)
 
 
