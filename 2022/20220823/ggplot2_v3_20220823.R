@@ -17,13 +17,8 @@ tb1
 v_background_color = "#334960"
 v_direction = 1
 v_font_color = c("gray100", v_background_color, v_background_color, #abc
-                 v_background_color, v_background_color, "gray100", #edf
-                 "gray100", "gray20", "gray20") #ghi
-
-# v_direction = -1
-# v_font_color = c(v_background_color, v_background_color, v_background_color, #abc
-#                  "gray100", "gray100", v_background_color, #edf
-#                  v_background_color, "gray100", "gray100") #ghi
+                 v_background_color, v_background_color, v_background_color, #edf
+                 "gray100", v_background_color, v_background_color) #ghi
 
 
 tb1 %>% 
@@ -48,7 +43,7 @@ tb1 %>%
                     place = "bottomright", 
                     family = "BMJUAOTF",
                     min.size = 10) +
-  scale_fill_brewer(palette = "YlGnBu", direction = v_direction) +
+  scale_fill_brewer(palette = "RdBu", direction = v_direction) +
   labs(title = "ggplot2 - Treemap Chart",
        caption = "twitter @sourcebox7") +
   theme_void(base_family = "BMJUAOTF") +
@@ -67,7 +62,7 @@ tb1 %>%
         plot.margin = margin(0.3,0.3,0.3,0.3,"in"),
         plot.background = element_rect(fill = v_background_color, color = v_background_color))
 
-ggsave("~/github/ggplot2/2022/20220823/save_ggplot_02.png", 
+ggsave("~/github/ggplot2/2022/20220823/save_ggplot_03.png", 
        width = 8, height = 5, dpi = 240, units = "in")
 
   
