@@ -29,7 +29,7 @@ tibble(w = c(2,4,1,2,1),
         plot.background = element_rect(fill = v_background_color, color = v_background_color))
 
 ggsave("~/github/ggplot2/2022/20220831/save_ggplot_01.png", 
-       width = 8, height = 6, dpi = 240, units = "in") 
+       width = 6, height = 6, dpi = 240, units = "in") 
 
 v_size = c(14,10,8,6,4) # 톤프사이즈
 text_color = c("gray100",v_background_color,v_background_color,"gray100","gray100")

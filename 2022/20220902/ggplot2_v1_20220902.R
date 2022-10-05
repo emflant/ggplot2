@@ -115,14 +115,14 @@ ggsave("~/github/ggplot2/2022/20220902/save_ggplot_01.png",
 
 
 
-v_background_color = "#334960"
+v_background_color = "#3A536E" #334960
 tb1 %>% union_all(tb2) %>% 
   ggplot(aes(x,y, fill = factor(z))) +
   geom_col(colour = v_background_color, size = 1) +
   geom_text(aes(x = -3, y = 0, label = l), 
             family = "BMJUAOTF", colour = "gray100",
             size = 20) +
-  scale_fill_manual(values = c("gray40", "#F7C848")) +  #415D7A  #4E7094 
+  scale_fill_manual(values = c("gray50", "#F7C848")) +  #415D7A  #4E7094 
   coord_polar(theta = "y") +
   xlim(-3, 2.5) +
   facet_wrap(~g) +
@@ -148,4 +148,4 @@ tb1 %>% union_all(tb2) %>%
 
 
 ggsave("~/github/ggplot2/2022/20220902/save_ggplot_02.png", 
-       width = 8, height = 6, dpi = 240, units = "in", bg = v_background_color) 
+       width = 8, height = 5, dpi = 240, units = "in", bg = v_background_color) 
