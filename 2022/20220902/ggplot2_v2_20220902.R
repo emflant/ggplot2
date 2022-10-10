@@ -58,6 +58,58 @@ ggsave("~/github/ggplot2/2022/20220902/20221002_23.png",
 ########################################################
 
 
+########################################################
+
+
+v_background_color = "#3A536E" #334960
+v_size1 = 5
+v_count1 = 12
+v_value1 = 5
+
+
+tb1 = tibble(g = 1, x = rep(1, v_count1), 
+             y = rep(v_size1, v_count1), 
+             z = c(rep(1,v_value1), rep(0, v_count1-v_value1)),
+             n = 1:v_count1) %>% 
+  mutate(l = ifelse(n == 1, v_value1, NA))
+
+
+tb1 %>% 
+  ggplot(aes(x,y, fill = factor(z))) +
+  geom_col(colour = v_background_color, size = 1) +
+  geom_text(aes(x = -3, y = 0, label = l), 
+            family = "BMJUAOTF", colour = "gray100",
+            size = 30, na.rm = T) +
+  #F7C848 C7F2A4  56BBF1  5EE6EB FC92E3 F9FD50
+  scale_fill_manual(values = c("gray50", "#C7F2A4")) +  
+  coord_polar(theta = "y") +
+  xlim(-3, 1.5) +
+  # facet_wrap(~g) +
+  labs(title = "ggplot2 - Progress Chart",
+       caption = "twitter @sourcebox7") +
+  theme_void() +
+  theme(legend.position = "none",
+        panel.spacing = unit(-0.5,"in"),
+        strip.text = element_blank(),
+        plot.title = element_text(color = "gray100", 
+                                  family = "Menlo", 
+                                  face = "bold",
+                                  hjust = -1, 
+                                  size = 20,
+                                  margin = margin(0,0,0,0,"in")),
+        plot.caption = element_text(color = "gray100", 
+                                    family = "Menlo", 
+                                    hjust = 1.2, 
+                                    size = 10,
+                                    margin = margin(0,0,0,0,"in")),
+        plot.margin = margin(0.5,0,0.5,0,"in"),
+        plot.background = element_rect(fill = v_background_color, color = NA))
+
+
+ggsave("~/github/hugo/app/app-01/content/post/2022/20221002/images/20221002_00.png", 
+       width = 8, height = 6, dpi = 120, units = "in", bg = v_background_color) 
+
+
 
 ########################################################
 
@@ -121,6 +173,9 @@ tb1 %>% union_all(tb2) %>%
 
 ggsave("~/github/ggplot2/2022/20220902/20221002_01.png", 
        width = 8, height = 5, dpi = 120, units = "in", bg = v_background_color) 
+
+
+
 
 
 tb1 %>% union_all(tb2) %>% 

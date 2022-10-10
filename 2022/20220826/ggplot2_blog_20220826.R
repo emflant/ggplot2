@@ -87,7 +87,7 @@ tb2 = expand.grid(g = 1, x = 1:4) %>%
 
 tb2  
 
-v_point_size = 8.5
+v_point_size = 10.3
 v_background_color = "#334960"
 # v_background_color = "gray100"
 v_palette = "YlOrBr"# "PuBuGn" # "PuBu" # "Blues" # "YlOrBr" # "PuOr" #"RdBu"
@@ -99,7 +99,7 @@ ggplot(tb2, aes(x,y, fill= factor(x))) +
   geom_point(aes(color = factor(x)), size = v_point_size) +
   geom_text(aes(x = x + 0.05, y = 0, label = paste0(y, "%")), colour = tb2$c,
             fontface = "bold", 
-            size = 3.8, nudge_y = c(2,1.5,1.2,1),
+            size = 4.5, nudge_y = c(2,1.5,1.2,1),
             family = "BMJUAOTF") +
   scale_fill_brewer(palette = v_palette, direction = 1) +
   scale_color_brewer(palette = v_palette, direction = 1) +
@@ -130,7 +130,7 @@ ggplot(tb2, aes(x,y, fill= factor(x))) +
 
 #E2071B #41E000 #00F0D3
 ggsave("~/github/hugo/app/app-01/content/post/2022/20221004/images/20221004_00.png", 
-       width = 8, height = 6, dpi = 120, units = "in", bg = v_background_color) 
+       width = 8, height = 7, dpi = 120, units = "in", bg = v_background_color) 
 
 
 
