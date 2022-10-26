@@ -16,15 +16,23 @@ ggplot(tb1, aes(x, y, fill = factor(1))) +
   geom_tile(size = 2, colour = "gray100") +
   coord_fixed()
 
+
+ggplot(tb1, aes(x, y, fill = factor(1))) +
+  geom_tile(size = 2, colour = "gray100") +
+  geom_text(aes(label = paste0("x = ", x, ", y = ", y))) +
+  coord_fixed()
+
 ggsave("~/github/hugo/app/app-01/content/post/2022/20221014/images/20221014_11.png", 
        width = 6, height = 3.5, dpi = 120, units = "in")
 
 
 tb1 = tibble(x = c(1,2,3,1,2),
-             y = c(1,1,1,2,2))
+             y = c(1,1,1,2,2),
+             z = c(1,1,1,1,2))
 tb1
-ggplot(tb1, aes(x, y, fill = factor(1))) +
+ggplot(tb1, aes(x, y, fill = factor(z))) +
   geom_tile(size = 2, colour = "gray100") +
+  geom_text(aes(label = paste0("x = ", x, ", y = ", y))) +
   coord_fixed()
 ggsave("~/github/hugo/app/app-01/content/post/2022/20221014/images/20221014_12.png", 
        width = 6, height = 3.5, dpi = 120, units = "in")
@@ -41,6 +49,7 @@ tb1
 
 ggplot(tb1, aes(x2, y2, fill = factor(1))) +
   geom_tile(size = 1, colour = "gray100") +
+  geom_text(aes(label = paste0("(", x2, ", ", y2, ")"))) +
   coord_fixed()
 
 ggsave("~/github/hugo/app/app-01/content/post/2022/20221014/images/20221014_13.png", 
