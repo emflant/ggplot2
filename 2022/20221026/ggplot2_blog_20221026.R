@@ -1,33 +1,14 @@
 source('./core.R')
 
-# https://www.data.go.kr/data/15051059/fileData.do
-tb1 = read_excel('./2022/20221024/pharmacy_202206.xlsx')
-
-tb1
-
-tb2 = tb1 %>% select(sido = 시도코드명, name = 요양기관명) %>% 
-  group_by(sido) %>% 
-  summarise(n = n()) %>% 
-  arrange(desc(n)) %>% 
-  head(7)
-
-
-
-tibble(x = c(1,2,3, 1),
-       y = c(10,-43, 20, -5)) %>% 
-  ggplot(aes(x,y)) +
-  geom_col() + 
-  ylim(c(-100, 100))
-
 
 # https://www.data.go.kr/data/15070293/fileData.do
 
-tb1 = read_excel( "./2022/20221026/data_20211231.xlsx")
-
+tb1 = readxl::read_excel( "./2022/20221026/data_20211231.xlsx")
+tb1 %>% head()
 tb2 = tb1 %>% 
   select(age = 사상자연령층, gender = 사상자성별, n = 사망자수) %>% 
   filter(age != '불명', gender != "기타/불명")
-tb2
+tb2 %>% head()
 ggplot(tb2, aes(age, n, fill = gender)) +
   geom_col() +
   theme_bw(base_family = "NanumGothicExtraBold") +
@@ -42,7 +23,17 @@ ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221026/image
 tb3 = tb2 %>% 
   mutate(n2 = ifelse(gender == "남", n * -1, n),
          ord = as.numeric(str_sub(age, 1, 2))) 
-tb3
+tb3 %>% head
+
+ggplot(tb3, aes(age, n2, fill = gender)) +
+  geom_col() + 
+  # coord_flip() +
+  theme_bw(base_family = "NanumGothicExtraBold") +
+  theme(axis.title = element_blank())
+
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221026/images/20221026_12.png", 
+       width = 6, height = 4, dpi = 180, units = "in", )
+
 
 ggplot(tb3, aes(age, n2, fill = gender)) +
   geom_col() + 
@@ -50,7 +41,7 @@ ggplot(tb3, aes(age, n2, fill = gender)) +
   theme_bw(base_family = "NanumGothicExtraBold") +
   theme(axis.title = element_blank())
 
-ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221026/images/20221026_12.png", 
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221026/images/20221026_13.png", 
        width = 6, height = 4, dpi = 180, units = "in", )
 
 
@@ -61,7 +52,7 @@ ggplot(tb3, aes(reorder(age, -ord), n2, fill = gender)) +
   theme_bw(base_family = "NanumGothicExtraBold") +
   theme(axis.title = element_blank())
 
-ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221026/images/20221026_13.png", 
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221026/images/20221026_14.png", 
        width = 6, height = 4, dpi = 180, units = "in", )
 
 
@@ -74,7 +65,7 @@ tb3 = tb2 %>%
 v_background_color = "#334960" 
 
 # ['#fcfbfd','#efedf5','#dadaeb','#bcbddc','#9e9ac8','#807dba','#6a51a3','#54278f','#3f007d']
-ggplot(tb3, aes(reorder(age, -ord), n2)) +
+ggplot(tb3, aes(reorder(age, ord), n2)) +
   geom_col(aes(fill = gender)) + 
   geom_text(aes(label = n),hjust = tb3$h,
             colour = "gray100",
@@ -88,15 +79,20 @@ ggplot(tb3, aes(reorder(age, -ord), n2)) +
        caption = "twitter @sourcebox7") +
   theme_void(base_family = "BMJUAOTF") +
   theme(plot.margin = margin(0.3,0.5,0.3,0.4,"in"),
-        legend.position = c(0.9, 0.93),
+        # legend.position = c(0.85, 0.07),
+        legend.position = c(0.81, 1.07),
         legend.key.size = unit(7, "mm"),
         # legend.spacing.y = unit(1, "cm"),
-        legend.direction = "horizontal",
         # legend.box.margin = margin(2,0,2,0,"mm"),
+        legend.direction = "horizontal",
+        # legend.background  = element_rect(fill = v_background_color,
+        #                                   colour = "gray100",
+        #                                   size = 1),
+        # legend.margin = margin(2,2,2,2,"mm"),
         axis.text.y = element_text(colour = "gray100", size = 12),
         legend.title = element_blank(),
         legend.text = element_text(colour = "gray100", size = 12,
-                                   margin = margin(0,3,0,0,"mm")),
+                                   margin = margin(0,0,0,0,"mm")),
         plot.title = element_text(color = "gray100", 
                                   family = "BMJUAOTF", 
                                   # face = "bold",
@@ -147,7 +143,7 @@ ggplot(tb3, aes(reorder(age, -ord), n2)) +
        caption = "twitter @sourcebox7") +
   theme_void(base_family = "BMJUAOTF") +
   theme(plot.margin = margin(0.3,0.5,0.3,0.4,"in"),
-        legend.position = c(0.9, 0.93),
+        legend.position = c(0.85, 0.93),
         legend.key.size = unit(7, "mm"),
         # legend.spacing.y = unit(1, "cm"),
         legend.direction = "horizontal",
