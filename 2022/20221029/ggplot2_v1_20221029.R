@@ -2,6 +2,7 @@ source('./core.R')
 
 
 # https://www.itstat.go.kr/itstat/main.html
+# https://www.index.go.kr/potal/main/EachDtlPageDetail.do?idx_cd=2755
 
 # 21.12월 
 
