@@ -1,10 +1,75 @@
 source('./core.R')
 
 
-tb1 = tibble(x = c(1,3), y = c(4, 7.7))
+tb1 = tibble(x = c(1,3), 
+             y = c(4, 7.7))
+
+ggplot(tb1, aes(x,y)) +
+  geom_col() +
+  theme(axis.title = element_blank())
+
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221113/images/20221113_01.png", 
+       width = 6, height = 4, dpi = 120, units = "in")
+
+
+# case1
+ggplot(tb1, aes(x,y)) +
+  geom_col() +
+  xlim(-5, 9) +
+  ylim(0, 13) +
+  theme(axis.title = element_blank())
+
+# case2
+ggplot(tb1, aes(x,y)) +
+  geom_col() +
+  lims(x = c(-5, 9), y = c(0, 13)) +
+  theme(axis.title = element_blank())
+
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221113/images/20221113_02.png", 
+       width = 6, height = 4, dpi = 120, units = "in")
+
+
+
+ggplot(tb1, aes(x,y)) +
+  geom_col() +
+  scale_x_continuous(breaks = c(1,3), 
+                     labels = c("A", "B")) +
+  xlim(-5, 9) +
+  ylim(0, 13) +
+  theme(axis.title = element_blank())
+
+
+ggplot(tb1, aes(x,y)) +
+  geom_col() +
+  scale_x_continuous(breaks = c(1,3), 
+                     labels = c("A", "B"),
+                     limits = c(-5, 9)) + # limits 정보추가.
+  # xlim(-5, 9) + # xlim 은 주석으로 삭제처리.
+  ylim(0, 13) +
+  theme(axis.title = element_blank())
+
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221113/images/20221113_03.png", 
+       width = 6, height = 4, dpi = 120, units = "in")
+
+
+ggplot(tb1, aes(x,y)) +
+  geom_col() +
+  scale_x_continuous(breaks = c(1,3), 
+                     labels = c("A", "B"),
+                     limits = c(-2, 6)) + 
+  ylim(0, 13) +
+  theme(axis.title = element_blank())
+
+ggsave("~/github/hugo/app/sourcebox-hugo-v0.104/content/post/2022/20221113/images/20221113_04.png", 
+       width = 6, height = 4, dpi = 120, units = "in")
+
 
 tb_line1 = add_line(in_start = c(1,4.1), in_end = c(-2, 7), 1)
 tb_line2 = add_line(in_start = c(3,7.8), in_end = c(6, 10), -1)
+
+
+tb_line1
+
 
 ggplot(tb1, aes(x,y)) +
   geom_col() +
