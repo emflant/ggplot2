@@ -9,7 +9,8 @@ library(janitor)
 
 v_dark_bgcolor = "#334960" 
 v_light_bgcolor = "#F4F6FB"
-
+v_font_bm = "BMJUAOTF"
+v_font_base = "AppleSDGothicNeo-Bold"
 
 # 예시
 # tb4 = add_line(in_start = c(1,4), in_end = c(-3, 7), 1)

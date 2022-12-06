@@ -3,7 +3,7 @@ source('./core.R')
 
 tb1 = tibble(x = c(1,3), 
              y = c(4, 7.7))
-
+tb1
 ggplot(tb1, aes(x,y)) +
   geom_col() +
   theme(axis.title = element_blank())
