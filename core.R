@@ -1,16 +1,30 @@
+# install.packages(c("tidyverse", "patchwork", "readxl", "lubridate", "ggchicklet",
+#                    "treemapify","ggbump","janitor","RPostgres","DBI", 
+#                   "extrafont", "furrr", "tictoc", "mongolite"))
+
 library(tidyverse)
 library(patchwork)
 library(readxl)
 library(lubridate)
-library(ggchicklet)
+# library(ggchicklet)
 library(treemapify)
 library(ggbump)
 library(janitor)
+library(RPostgres)
+library(DBI)
+library(extrafont)
+library(furrr)
+library(tictoc)
+# font_import()
+# extrafont::loadfonts(device = "postscript")
 
 v_dark_bgcolor = "#334960" 
 v_light_bgcolor = "#F4F6FB"
 v_font_bm = "BMJUAOTF"
-v_font_base = "AppleSDGothicNeo-Bold"
+v_font_base = "AppleSDGothicNeo-Bold" 
+v_font_bold = "AppleSDGothicNeo-Bold"
+v_font_heavy = "AppleSDGothicNeo-Heavy"
+v_water_mark = "sourcebox.dev"
 
 # 예시
 # tb4 = add_line(in_start = c(1,4), in_end = c(-3, 7), 1)
