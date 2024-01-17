@@ -1,6 +1,8 @@
 source('./geo_core.R')
 # ggplot2 - 경도/위도값을 EPSG:5179 좌표계로 변환하기
 
+dokdo_scale = map_scale(get_dokdo(), scale = 12)
+
 map_nocrs = read_sf('~/Documents/map/sig_20230729/sig.shp') |> 
   mutate(SIG_KOR_NM = iconv(SIG_KOR_NM, from = "EUC-KR", to = 'UTF-8')) |> 
   ms_simplify(keep = 0.001, keep_shapes = T)
@@ -27,8 +29,10 @@ st_crs(map_5179)
 #   ms_simplify(keep = 0.001, keep_shapes = T) 
 geom_text
 map_nocrs
-ggplot(map_nocrs) + 
-  geom_sf() +
+ggplot() + 
+  geom_sf(data = map_5179) +
+  geom_sf(data = dokdo_scale) +
+  coord_sf(datum = st_crs(5179)) +
   annotate("text", x = xmean, y = ymean, alpha = 0.7,
            label = v_water_mark, colour = "gray0", size = 7,
            family = "AppleSDGothicNeo-Heavy") +
@@ -36,8 +40,9 @@ ggplot(map_nocrs) +
   theme_bw(base_family = v_font_bold) +
   theme(axis.title = element_blank()) +
 
-ggplot(map_5179) + 
-  geom_sf() +
+ggplot() + 
+  geom_sf(data = map_5179) +
+  geom_sf(data = dokdo_scale) +
   annotate("text", x = xmean, y = ymean, alpha = 0.7,
            label = v_water_mark, colour = "gray0", size = 7,
            family = "AppleSDGothicNeo-Heavy") +
@@ -50,14 +55,15 @@ ggplot(map_5179) +
 
 ggsave(filename = "./2024/20240113/v01-01.png", 
        device = grDevices::png,
-       width = 10, height = 5, dpi = 180, units = "in")
+       width = 10, height = 4.6, dpi = 180, units = "in")
 
 
 
 
 
-ggplot(map_5179) + 
-  geom_sf() +
+ggplot() + 
+  geom_sf(data = map_5179) +
+  geom_sf(data = dokdo_scale) +
   coord_sf(datum = st_crs(4326)) +
   annotate("text", x = 1050000, y = 1800000, alpha = 0.7,
            label = v_water_mark, colour = "gray0", size = 7,
@@ -65,8 +71,9 @@ ggplot(map_5179) +
   labs(title = "(지도 2-1) datum = 4326") +
   theme_bw(base_family = "AppleSDGothicNeo-Bold") +
   theme(axis.title = element_blank()) +
-ggplot(map_5179) + 
-  geom_sf() +
+ggplot() + 
+  geom_sf(data = map_5179) +
+  geom_sf(data = dokdo_scale) +
   coord_sf(datum = st_crs(5179)) +
   annotate("text", x = 1050000, y = 1800000, alpha = 0.7,
            label = v_water_mark, colour = "gray0", size = 7,
@@ -78,13 +85,14 @@ ggplot(map_5179) +
 
 ggsave(filename = "./2024/20240113/v01-02.png", 
        device = grDevices::png,
-       width = 10, height = 5, dpi = 180, units = "in")
+       width = 10, height = 4.6, dpi = 180, units = "in")
 
 
 
 
 ggplot(map_5179) + 
   geom_sf() +
+  geom_sf(data = dokdo_scale) +
   coord_sf(crs = st_crs(5179)) +
   annotate("text", x = 1050000, y = 1800000, alpha = 0.7,
            label = v_water_mark, colour = "gray0", size = 7,
@@ -94,6 +102,7 @@ ggplot(map_5179) +
   theme(axis.title = element_blank()) +
 ggplot(map_5179) + 
   geom_sf() +
+  geom_sf(data = dokdo_scale) +
   coord_sf(crs = st_crs(4326)) +
   annotate("text", x = 128, y = 36.1, alpha = 0.7,
            label = v_water_mark, colour = "gray0",size = 7,
@@ -105,7 +114,7 @@ ggplot(map_5179) +
   
 ggsave(filename = "./2024/20240113/v01-03.png", 
        device = grDevices::png,
-       width = 10, height = 5, dpi = 180, units = "in")
+       width = 10, height = 4.6, dpi = 180, units = "in")
 
 
 
@@ -113,6 +122,7 @@ ggsave(filename = "./2024/20240113/v01-03.png",
 
 ggplot(map_5179) + 
   geom_sf() +
+  geom_sf(data = dokdo_scale) +
   coord_sf(crs = st_crs(5179)) +
   annotate("text", x = xmean, y = ymean, alpha = 0.5,
            label = v_water_mark, colour = "gray0", size = 5,
@@ -138,6 +148,7 @@ st_bbox(mpoint)
 map_5179
 ggplot(map_5179) + 
   geom_sf() +
+  geom_sf(data = dokdo_scale) +
   coord_sf(crs = st_crs(4326)) +
   annotate("text", x = 127.77198, y = 35.90002, alpha = 0.5,
            label = v_water_mark, colour = "gray0", size = 5,

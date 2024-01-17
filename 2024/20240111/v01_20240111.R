@@ -1,5 +1,7 @@
 source('./geo_core.R')
 
+dokdo_scale = map_scale(get_dokdo(), scale = 12)
+
 sido_info = read_sf('~/Documents/map/sido_20230729/ctprvn.dbf') |> 
   st_drop_geometry() |> 
   mutate(CTP_KOR_NM = iconv(CTP_KOR_NM, from = "EUC-KR", to = 'UTF-8'))
@@ -29,12 +31,16 @@ map3 |>
 # [1] "CTPRVN_CD"  "CTP_ENG_NM" "CTP_KOR_NM" "SIG_CD"     
 # "SIG_ENG_NM" "SIG_KOR_NM" "geometry"   "CTPRVN_NUM"
 
-ggplot(map3) +
-  geom_sf() +
-  coord_sf(crs = sf::st_crs(4326))+
-  annotate("text", x = 128, y = 36.1, alpha = 0.5,
-           label = v_water_mark, colour = "gray0",size = 7,
-           family = "AppleSDGothicNeo-Heavy") +
+map3
+
+ggplot() +
+  geom_sf(data = map3) +
+  geom_sf(data = dokdo_scale) +
+  # coord_sf(crs = sf::st_crs(4326))+
+  geom_text(data = get_center(map3), aes(x,y), label = v_water_mark,
+            colour = "gray0",size = 7, alpha = 0.5,
+            family = v_font_heavy) +
+  theme_bw(base_family = v_font_bold) +
   theme(axis.title = element_blank())
   # labs(title = "(지도 3-2) crs = 4326") +
   # theme_bw(base_family = "AppleSDGothicNeo-Bold") +
@@ -51,10 +57,11 @@ map3
 # ggplot(map3) +
 #   geom_sf(aes(fill = SIG_CD)) +
 #   theme(legend.position = "none")
-  
+dokdo_scale
 
-ggplot(map3) +
-  geom_sf(aes(fill = SIG_CD)) +
+ggplot() +
+  geom_sf(data = map3, aes(fill = SIG_CD)) +
+  geom_sf(data = dokdo_scale, aes(fill = LI_CD)) +
   theme_bw(base_family = "AppleSDGothicNeo-Bold") +
   theme(legend.position = "none") +
   annotate("text", x = 1050000, y = 1800000, alpha = 0.5,
@@ -144,6 +151,7 @@ ggsave(filename = "./2024/20240111/v01-11.png",
 my_plot = function(type, vtitle){
   ggplot(map3) +
     geom_sf(aes(fill = SIG_CD)) +
+    geom_sf(data = dokdo_scale, aes(fill = LI_CD)) +
     scale_fill_viridis_d(option = type) +
     labs(title = vtitle) +
     theme_bw(base_family = "AppleSDGothicNeo-Bold") +
@@ -200,6 +208,7 @@ ggsave(filename = "./2024/20240111/v01-14.png",
 
 g1 = ggplot(map3) +
   geom_sf(aes(fill = SIG_CD)) +
+  geom_sf(data = dokdo_scale, aes(fill = LI_CD)) +
   scale_fill_viridis_d() +
   labs(title = "begin = 0, end = 1") +
   theme_bw(base_family = v_font_bold) +
@@ -210,6 +219,7 @@ g1 = ggplot(map3) +
 
 g2 = ggplot(map3) +
   geom_sf(aes(fill = SIG_CD)) +
+  geom_sf(data = dokdo_scale, aes(fill = LI_CD)) +
   labs(title = "begin = 0.5, end = 1") +
   scale_fill_viridis_d(begin = 0.5, end = 1) +
   theme_bw(base_family = "AppleSDGothicNeo-Bold") +

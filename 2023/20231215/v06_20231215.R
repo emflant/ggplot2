@@ -1,5 +1,8 @@
 source('./geo_core.R')
 
+
+dokdo_scale = map_scale(get_dokdo(), scale = 12)
+
 sido1 = read_sf('~/Documents/map/sido_20230729/ctprvn.shp')
 sido1 |> head(3)
 sido1 |> str
@@ -40,13 +43,18 @@ sido4 = sido3 |>
   ms_simplify(keep = 0.01, keep_shapes = T)
 
 
-ggplot(sido4) +
-  geom_sf() +
-  coord_sf(crs = st_crs(4326))
+ggplot() +
+  geom_sf(data = sido4) +
+  geom_sf(data = dokdo_scale) +
+  geom_text(data = get_center(sido4), aes(x,y), label = v_water_mark,
+            colour = "gray0",size = 7, alpha = 0.3,
+            family = v_font_heavy) +
+  theme_bw(base_family = v_font_bold) +
+  theme(axis.title = element_blank())
 
 ggsave(filename = "./2023/20231215/v06_20231215-01.png", 
        device = grDevices::png,
-       width = 5, height = 5, dpi = 120, units = "in")
+       width = 6, height = 5, dpi = 180, units = "in")
 ##################################################################
 
 # ggplot(sido4) +

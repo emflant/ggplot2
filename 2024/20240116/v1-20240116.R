@@ -24,7 +24,8 @@ dokdo_watermark = st_set_geometry(dokdo_1, center)
 
 
 # st_centroid(dokdo_1)
-
+ggplot() + 
+  geom_sf(data = dokdo_1)
 ggplot() + 
   geom_sf(data = dokdo_1) + 
   labs(title = "대한민국 독도") +
@@ -42,6 +43,9 @@ ggsave(filename = "./2024/20240116/v01-01.png",
 
 
 dokdo_0004 = get_dokdo(vkeep = 0.004)
+
+dokdo_2 = dokdo_1 |> 
+  ms_simplify(keep = 0.004, keep_shapes = T)
 
 center_0004 = dokdo_0004 |> 
   st_geometry() |> 
@@ -69,7 +73,7 @@ get_center(dokdo_0004)
 
 ggplot() + 
   geom_sf(data = sig_map) +
-  geom_sf(data = dokdo_0004) +
+  # geom_sf(data = dokdo_0004) +
   geom_point(data = dokdo_0004, aes(geometry = geometry), 
              shape = 1, size = 7, colour = "red",
              stat = "sf_coordinates") +
@@ -100,7 +104,7 @@ dokdo_scale = map_scale(dokdo_0004, scale = 12)
 
 ggplot() + 
   geom_sf(data = sig_map) +
-  geom_sf(data = dokdo_scale) +
+  geom_sf(data = dokdo_0004) +
   geom_point(data = dokdo_0004, aes(geometry = geometry), 
              shape = 1, size = 7, colour = "red",
              stat = "sf_coordinates") +

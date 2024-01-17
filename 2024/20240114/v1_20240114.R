@@ -4,7 +4,7 @@ dokdo = get_dokdo()
 
 ggplot()+
   geom_sf(data = dokdo)
-sig_map = get_map_sig(vkeep = 0.05)
+sig_map = get_map_sig()
 
 # sig_map |> st_crs()
 
@@ -71,9 +71,12 @@ points = data.frame(lon = c(127, 129), lat = c(37.5, 35.5)) |>
 xmid = mean(c(st_bbox(sig_map)$xmin, st_bbox(sig_map)$xmax))
 ymid = mean(c(st_bbox(sig_map)$ymin, st_bbox(sig_map)$ymax))
 # sig_map
+dokdo_scale = map_scale(get_dokdo(), scale = 12)
+
 ggplot() +
   geom_sf(data = sig_map) +
   geom_sf(data = points) +
+  geom_sf(data = dokdo_scale) +
   annotate("text", x = xmid, y = ymid, alpha = 0.5,
            label = v_water_mark, colour = "gray0",size = 7,
            family = v_font_heavy) +
@@ -90,6 +93,7 @@ ggsave(filename = "./2024/20240114/v01-01.png",
 
 ggplot() +
   geom_sf(data = sig_map) +
+  geom_sf(data = dokdo_scale) +
   geom_sf(data = points, size = 3, shape = 1, colour = "blue") +
   annotate("text", x = xmid, y = ymid, alpha = 0.5,
            label = v_water_mark, colour = "gray0",size = 7,
@@ -105,6 +109,7 @@ ggsave(filename = "./2024/20240114/v01-02.png",
 
 ggplot() +
   geom_sf(data = sig_map) +
+  geom_sf(data = dokdo_scale) +
   geom_sf(data = points, size = 3, shape = 1, colour = "blue") +
   geom_point(data = points, aes(geometry = geometry),
              shape = 1, size = 3, colour = "blue",

@@ -23,7 +23,7 @@ get_map_sig = function(vkeep = 0.001){
 }
 
 
-get_dokdo = function(vkeep = 0.001){
+get_dokdo = function(vkeep = 0.004){
   read_sf('~/Documents/map/li_20230729/li.shp') |> 
     mutate(LI_KOR_NM = iconv(LI_KOR_NM, from = "EUC-KR", to = 'UTF-8')) |> 
     st_set_crs(5179) |> 
