@@ -44,6 +44,7 @@ ggsave(filename = "./2024/20240116/v01-01.png",
 
 dokdo_0004 = get_dokdo(vkeep = 0.004)
 
+map_scale(dokdo_0004, 12)
 dokdo_2 = dokdo_1 |> 
   ms_simplify(keep = 0.004, keep_shapes = T)
 

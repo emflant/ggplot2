@@ -1,7 +1,7 @@
 # install.packages(c("tidyverse", "patchwork", "readxl", "lubridate", "ggchicklet",
 #                    "treemapify","ggbump","janitor","RPostgres","DBI", 
 #                   "extrafont", "furrr", "tictoc", "mongolite"))
-
+library(scales)
 library(tidyverse)
 library(patchwork)
 library(readxl)
@@ -20,9 +20,11 @@ library(tictoc)
 
 v_dark_bgcolor = "#334960" 
 v_light_bgcolor = "#F4F6FB"
+#475368
 v_font_bm = "BMJUAOTF"
 v_font_base = "AppleSDGothicNeo-Bold" 
 v_font_bold = "AppleSDGothicNeo-Bold"
+v_font_bold2 = "AppleSDGothicNeo-ExtraBold"
 v_font_heavy = "AppleSDGothicNeo-Heavy"
 v_water_mark = "sourcebox.dev"
 
