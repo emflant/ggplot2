@@ -73,7 +73,8 @@ sido_with_dokdo = function(vkeep = 0.001){
   sido |> 
     filter(!str_detect(CTP_KOR_NM, '경상북도')) |> 
     union_all(sido47_2) |> 
-    arrange(CTPRVN_CD)
+    arrange(CTPRVN_CD) |> 
+    clean_names()
 }
 
 
@@ -98,6 +99,16 @@ sig_with_dokdo = function(vkeep = 0.001){
   
   sig |> 
     filter(!str_detect(SIG_KOR_NM, '^울릉군$')) |> 
-    union_all(ulleunggun2)
+    union_all(ulleunggun2) |> 
+    clean_names()
 }
 
+polygon_square = function(x, y, gap) {
+  p1 = c(x, y) 
+  p2 = c(x, y + gap)
+  p3 = c(x + gap, y + gap)
+  p4 = c(x + gap, y)
+  p5 = c(x, y) 
+  
+  st_polygon(list(rbind(p1, p2, p3, p4, p5)))  
+}

@@ -1,6 +1,6 @@
 # install.packages(c("tidyverse", "patchwork", "readxl", "lubridate", "ggchicklet",
 #                    "treemapify","ggbump","janitor","RPostgres","DBI", 
-#                   "extrafont", "furrr", "tictoc", "mongolite"))
+#                   "extrafont", "furrr", "tictoc", "mongolite", "ggspatial", "terra"))
 library(scales)
 library(tidyverse)
 library(patchwork)
@@ -15,6 +15,8 @@ library(DBI)
 library(extrafont)
 library(furrr)
 library(tictoc)
+library(terra)
+library(ggspatial)
 # font_import()
 # extrafont::loadfonts(device = "postscript")
 

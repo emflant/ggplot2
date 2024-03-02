@@ -228,3 +228,6 @@ ggplot(data = sido99) +
 ggsave(filename = "./2024/20240129/v03-04.png", 
        device = grDevices::png,
        width = 10, height = 7.4, dpi = 180, units = "in")
+
+
+
