@@ -1,7 +1,7 @@
 source('./core.R')
 raster_filepath = system.file("raster/srtm.tif", package = "spDataLarge")
 
-my_rast = rast(raster_filepath)
+my_rast = terra::rast(raster_filepath)
 
 my_rast_df = terra::as.data.frame(my_rast, xy = T)
 str(my_rast_df)
