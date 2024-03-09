@@ -28,6 +28,8 @@ v_font_base = "AppleSDGothicNeo-Bold"
 v_font_bold = "AppleSDGothicNeo-Bold"
 v_font_bold2 = "AppleSDGothicNeo-ExtraBold"
 v_font_heavy = "AppleSDGothicNeo-Heavy"
+v_font_gmarket_bold = "GmarketSansTTFBold"
+v_font_gmarket_medium = "GmarketSansTTFMedium"
 v_water_mark = "sourcebox.dev"
 
 # 예시
