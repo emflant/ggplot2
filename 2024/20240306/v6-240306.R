@@ -17,6 +17,7 @@ map_sigungu1
 map_dong2 = map_dong1 |> mutate(sido_cd = str_sub(adm_cd, 1,2), .before = geometry) |> 
   mutate(sigungu_cd = str_sub(adm_cd,1,5), .before = geometry)
 
+map_dong2
 map_dong2_seoul = map_dong2 |> filter(str_detect(sido_cd, '11'))
 map_dong2_seoul
 ######################################################################################
@@ -62,15 +63,42 @@ map_dong2_seoul3 = map_dong2_seoul2 |>
   summarise() 
 
 map_dong2_seoul4 = map_dong2_seoul3 |> 
-  mutate(sig = str_replace(seongeogumyeong, '(갑|을|병|정|무)$', ''), .before = geometry)
+  mutate(sig = str_replace(seongeogumyeong, '(갑|을|병|정|무)$', ''), .before = geometry) |> 
+  mutate(knd1 = str_extract(seongeogumyeong, '(갑|을|병|정|무)$'), .before = geometry) |> 
+  mutate(knd2 = factor(knd1, levels = c("갑", "을", "병", "정", "무")), .before = geometry) 
+  
+map_dong2_seoul4
+map_dong2_seoul4 |> print(n = Inf)
+# a = c("을", "갑", "정", "무", "병")
+# 
+# factor(a)
+# factor(a, levels = c("갑", "을", "병", "정", "무"))
+# 
+# factor(a, levels = c("갑", "을", "병", "정", "무")) |> order()
 
+map_dong2_seoul4
+
+map_dong2_seoul4 |>  print(n = Inf)
 # map_dong2_seoul5 = map_dong2_seoul4 |> 
 #   ms_simplify(keep = 0.01)
 map_dong2_seoul3
+map_dong2_seoul2
+
+# map_dong2_seoul4 |> filter(str_detect(seongeogumyeong, "강서구")) |> 
+ggplot() + 
+  geom_sf(data = map_dong2_seoul4 |> filter(str_detect(seongeogumyeong, "강서구")), 
+          aes(fill = reorder(seongeogumyeong, knd3) ) ) +
+  scale_fill_viridis_d(option = "E", begin = 0.3, end = 0.8) +
+  theme_bw(base_family = v_font_bold2) +
+  theme(title = element_blank())
 
 ggplot() + 
-  geom_sf(data = map_dong2_seoul2 |> filter(str_detect(seongeogumyeong, "강서구"))) +
-  geom_sf(data = map_dong2_seoul4 |> filter(str_detect(seongeogumyeong, "강서구")), fill = NA)
+  geom_sf(data = map_dong2_seoul4 |> filter(str_detect(seongeogumyeong, "강서구")), 
+          aes(fill = reorder(seongeogumyeong, knd3) ) ) +
+  scale_fill_viridis_d(option = "E", begin = 0.3, end = 0.8) +
+  theme_bw(base_family = v_font_bold2) +
+  theme(title = element_blank())
+
 
 map_seongeogu = function(vmap, vdongmap, vTitle = "종로구", voption = "D", vbegin = 0.3, vend = 0.8){
   design <- "
@@ -141,10 +169,7 @@ ggsave(filename = "./2024/20240306/v6-03.png",
        device = grDevices::png,
        width = 6, height = 4, dpi = 180, units = "in") 
 
-# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "영등포구", voption = "E")
-# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "동작구", voption = "E")
-# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "용산구", voption = "E")
-# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "양천구", voption = "E")
+
 map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "중구성동구", voption = "E")
 
 ggsave(filename = "./2024/20240306/v6-04.png", 
@@ -175,3 +200,19 @@ ggsave(filename = "./2024/20240306/v6-07.png",
 
 
 map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "강서구", voption = "E")
+
+ggsave(filename = "./2024/20240306/v6-11.png", 
+       device = grDevices::png,
+       width = 6, height = 4, dpi = 240, units = "in") 
+
+
+# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "영등포구", voption = "E")
+# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "동작구", voption = "E")
+# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "용산구", voption = "E")
+# map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "양천구", voption = "E")
+map_dong2_seoul4 |> st_drop_geometry() |> group_by(sig) |> summarise() |> 
+map_dong2_seoul4 |> slice(6:10)
+
+map_dong2_seoul4
+map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "강남구", voption = "E")
+map_seongeogu(map_dong2_seoul4, map_dong2_seoul2, "용산구", voption = "E")
