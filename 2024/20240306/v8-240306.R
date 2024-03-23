@@ -24,10 +24,6 @@ map_dong2 = map_dong1 |> mutate(sido_cd = str_sub(adm_cd, 1,2), .before = geomet
 
 map_dong2_gyeonggido = map_dong2 |> filter(str_detect(sido_cd, '31'))
 
-map_dong2
-# map_dong2 |> filter()
-
-map_dong2_gyeonggido
 ######################################################################################
 
 gyeonggido = read_excel('~/data/map/vote/seongeogu-gyeong-gido2.xlsx', skip = 3) |> 
@@ -40,7 +36,7 @@ gyeonggido2 = gyeonggido |>
   unnest_longer(dong1) |> 
   select(-4) |> 
   mutate(dong1 = map_chr(dong1, trimws))
-gyeonggido2
+# gyeonggido2
 # gyeonggido3 = gyeonggido2
 # gyeonggido2 = gyeonggido2 |> 
 #   mutate(gusigunmyeong = ifelse(str_detect(dong1, '(성동구)'), '성동구', gusigunmyeong)) |> 
@@ -69,7 +65,7 @@ gyeonggido3 = gyeonggido2 |>
 
 # 화성시갑 화성시을 정리필요.
 
-gyeonggido3 |> filter(dong == '율천동')
+# gyeonggido3 |> filter(dong == '율천동')
 
 
 # map_sigungu1
@@ -91,10 +87,8 @@ gyeonggido4 = gyeonggido3 |>
             by = join_by(gusigunmyeong == sigungu_nm2)) 
 
 
-gyeonggido4 |> filter(is.na(sigungu_nm)) |> 
-  print(n = Inf)
-
-gyeonggido4
+# gyeonggido4 |> filter(is.na(sigungu_nm)) |> 
+#   print(n = Inf)
 
 ######################################################################################
 
@@ -116,13 +110,22 @@ aa = map_dong2_gyeonggido21 |>
 
 aa
 
-bb = list(rbind(c(900000,1900000), c(900000,1905000), 
+bb = list(list(rbind(c(918000,1922000), c(918000,1926000), 
+                c(922000,1926000), c(922000,1922000), 
+                c(918000,1922000))),
+     list(rbind(c(900000,1900000), c(900000,1905000), 
                 c(905000,1905000), c(905000,1900000), 
-                c(900000,1900000))) |> 
-  st_polygon() |> 
+                c(900000,1900000)))) |> 
+  st_multipolygon() |> 
   st_sfc(crs = st_crs(aa))
-bb
-st_difference(aa, bb)
+
+# bb = list(rbind(c(900000,1900000), c(900000,1905000), 
+#                 c(905000,1905000), c(905000,1900000), 
+#                 c(900000,1900000))) |> 
+#   st_polygon() |> 
+#   st_sfc(crs = st_crs(aa))
+# bb
+# st_difference(aa, bb)
 
 map_dong2_gyeonggido22 = st_set_geometry(map_dong2_gyeonggido21, st_difference(aa, bb))
 
@@ -411,7 +414,19 @@ map_seongeogu2 = function(vmap, vdongmap, vTitle = "고양시", voption = "RdYlB
   g2
 }
 
+# Diverging
+# BrBG, PiYG, PRGn, PuOr, RdBu, RdGy, RdYlBu, RdYlGn, Spectral
+# 
+# Qualitative
+# Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3
+# 
+# Sequential
+# Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, 
+# PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu, YlOrBr, YlOrRd
+map_seongeogu2(map_dong2_gyeonggido4, map_dong2_gyeonggido23, "화성시", voption = 'YlOrBr')
 a = 1:10
+
+scale_fill_brewer()
 
 a[c(1,3)]
 # map_dong2_gyeonggido4 |> filter(str_detect(seongeogumyeong, "고양시")) |> nrow
@@ -427,13 +442,16 @@ ggplot() +
 
 for(i in seq_along(vsig)){
   
-  map_seongeogu2(map_dong2_gyeonggido4, map_dong2_gyeonggido23, vsig[i])
+  map_seongeogu2(map_dong2_gyeonggido4, map_dong2_gyeonggido23, vsig[i], voption = "GnBu")
   
-  ggsave(filename = paste0("./2024/20240306/v8-02/v8-", i, ".png"), 
+  ggsave(filename = paste0("./2024/20240306/v8-03/v8-", i, ".png"), 
          device = grDevices::png,
-         width = 6, height = 4, dpi = 180, units = "in") 
+         width = 6, height = 6, dpi = 180, units = "in") 
 }
-
+#rstats #ggplot2
+#데이터분석가#데이터분석 #데이터시각화 #인공지능 #검은색은진지한색 #태블로
+#총선 #지도
+scale_fill_brewer()
 
 ggplot(aa) +
   geom_sf() +
@@ -464,7 +482,7 @@ ggsave(filename = "./2024/20240306/v8-12.png",
        device = grDevices::png,
        width = 6, height = 4, dpi = 180, units = "in") 
 
-map_seongeogu2(map_dong2_gyeonggido4, map_dong2_gyeonggido23, "안산시", voption = "BuPu", vrev = T)
+map_seongeogu2(map_dong2_gyeonggido4, map_dong2_gyeonggido23, "안산시", voption = "PuBuGn", vrev = T)
 
 ggsave(filename = "./2024/20240306/v8-13.png", 
        device = grDevices::png,
