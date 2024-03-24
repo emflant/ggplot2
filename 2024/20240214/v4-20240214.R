@@ -64,7 +64,8 @@ sf_sam2
 # gg2(log_within)
 # 
 # 
-
+#E5E5E5
+##E5E5E5
 ggplot() +
   # geom_sf(data = sf_grid1, fill = NA) +
   # geom_sf(data = sf_grid1) + # , fill = "#DB8582"
@@ -105,8 +106,10 @@ st_within(sf_grid1, sf_sam1) |> print(n = Inf)
 log_within
 
 ggplot() +
-  geom_sf(data = sf_grid1[log_within,], fill = "red") +
-  geom_sf(data = sf_sam1, fill = NA) 
+  geom_sf(data = sf_sam1, fill = "black", alpha = 0.5) +
+  geom_sf(data = sf_grid1[log_within,], fill = "red", alpha = 0.5) +
+  theme_bw()
+  
 
 gg2(log_within)
 ggsave(filename = "./2024/20240214/v04-02.png", 
@@ -178,7 +181,7 @@ ggplot() +
 ggsave(filename = "./2024/20240214/v04-11.png", 
        device = grDevices::png,
        width = 6, height = 3.2, dpi = 180, units = "in")
-
+#E48B88
 ggplot() +
   geom_sf(data = sf_sam1) +
   geom_sf(data = sf_grid1[log_disjoint,], fill = "black", alpha = 0.5) +
@@ -197,18 +200,27 @@ ggsave(filename = "./2024/20240214/v04-12.png",
        device = grDevices::png,
        width = 6, height = 3.2, dpi = 180, units = "in")
 
+colours()
 ggplot() +
-  geom_sf(data = sf_sam1) +
+  geom_sf(data = sf_sam1, fill = "gray90") +
   # geom_sf(data = sf_grid1[log_disjoint,], fill = "black", alpha = 0.5) +
-  geom_sf(data = sf_grid1[log_overlaps,], fill = "green", alpha = 0.5) +
-  geom_sf(data = sf_grid1[log_touches,], fill = "blue", alpha = 0.5) +
-  geom_sf(data = sf_grid1[log_within,], fill = "red", alpha = 0.5) +
+  # geom_sf(data = sf_grid1[log_overlaps,], fill = "green", alpha = 0.5) +
+  # geom_sf(data = sf_grid1[log_touches,], fill = "blue", alpha = 0.5) +
+  geom_sf(data = sf_grid1[log_within,], fill = "tomato", alpha = 0.4) +#E7B7AE
+  # geom_sf(data = sf_grid1[log_within,], fill = "skyblue", alpha = 0.4) +#C6DBE6
+  # geom_sf(data = sf_grid1[log_within,], fill = "seagreen3", alpha = 0.4) +#ACD9A0
+  # geom_sf(data = sf_grid1[log_within,], fill = "yellow", alpha = 0.4) +#EFEEA5
   geom_text(data = get_center(sf_grid1), aes(x,y-0.4), label = v_water_mark, na.rm = T,
             colour = "gray0",size = 7, alpha = 0.3,
             family = v_font_heavy) +
   coord_sf(xlim = c(1,21), ylim = c(1,11), expand = F) +
   theme_bw() +
   theme(axis.title = element_blank())
+
+v_red_color = "#E7B7AE"
+v_blue_color = "#C6DBE6"
+v_green_color = "#B5DAC1"
+v_yellow_color = "#EFEEA5"
 
 ggplot() +
   geom_sf(data = sf_sam1) +

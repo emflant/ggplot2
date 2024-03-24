@@ -22,6 +22,12 @@ library(ggspatial)
 
 v_dark_bgcolor = "#334960" 
 v_light_bgcolor = "#F4F6FB"
+
+v_red_color = "#E7B7AE"
+v_blue_color = "#C6DBE6"
+v_green_color = "#B5DAC1"
+v_yellow_color = "#EFEEA5"
+
 #475368
 v_font_bm = "BMJUAOTF"
 v_font_base = "AppleSDGothicNeo-Bold" 

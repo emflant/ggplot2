@@ -169,7 +169,7 @@ ggsave(filename = "./2024/20240321/v1-TL_SPRD_MANAGE-2-120.png",
 
 # 실폭도로 TL_SPRD_RW
 sprd_rw = read_sf("~/data/map/map_202402/서울특별시/11000/", "TL_SPRD_RW")  |> 
-  clean_names()
+  janitor::clean_names()
   # ms_simplify(keep = 0.01, keep_shapes = T)
 sprd_rw
 ggplot(sprd_rw) +
@@ -209,7 +209,7 @@ ggsave(filename = "./2024/20240321/v1-TL_SPRD_RW-2-120.png",
 tb1 = tibble(x = 957000, y = 1942100)
 
 ggplot() +
-  geom_sf(data = sprd_rw2) +
+  geom_sf(data = sprd_rw2, fill = v_blue_color) +
   geom_text(data = tb1, aes(x,y), label = v_water_mark, na.rm = T,
             colour = "gray0",size = 7, alpha = 0.3,
             family = v_font_heavy) +
@@ -444,7 +444,45 @@ ggsave(filename = "./2024/20240321/v1-21-120.png",
        width = 8, height = 6, dpi = 120, units = "in") 
 
 
-R프로그래밍으로 만든 서초구 도로지도. 
 
 
-#rstats #ggplot2 #dataviz #datascience #map #지도 #데이터시각화 #데이터분석
+
+ggplot() +
+  geom_sf(data = sprd_rw |> filter(sig_cd =='11650'),
+          fill = NA, colour = "gray80") +
+  geom_sf(data = spbd_buld |> filter(sig_cd == '11650'),
+          fill = NA, colour = "gray80") +
+  annotate("text", x = (956000 + 1000), y = (1942000 + 100), label = v_water_mark, na.rm = T,
+           colour = "gray80",size = 7, alpha = 0.7,
+           family = v_font_heavy) +
+  coord_sf(xlim = c(956500, 956500 + 1000),
+           ylim = c(1942000, 1942000 + 1000)) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = "gray20", colour = "gray20"),
+        plot.margin = margin(0,0,0,0,"in"))
+
+
+ggsave(filename = "./2024/20240321/v1-22.png", 
+       device = grDevices::png,
+       width = 8, height = 8, dpi = 180, units = "in") 
+
+
+
+
+ggplot() +
+  geom_sf(data = sprd_rw |> filter(sig_cd =='11650'),
+          fill = NA, colour = "gray80") +
+  geom_sf(data = spbd_buld |> filter(sig_cd == '11650'),
+          fill = NA, colour = "gray80") +
+  annotate("text", x = (956000 + 1000), y = (1942000 + 100), label = v_water_mark, na.rm = T,
+           colour = "gray80",size = 7, alpha = 0.7,
+           family = v_font_heavy) +
+  coord_sf(xlim = c(956500, 956500 + 1000),
+           ylim = c(1942000, 1942000 + 1000)) +
+  theme_bw() +
+  theme(title = element_blank())
+
+
+ggsave(filename = "./2024/20240321/v1-23.png", 
+       device = grDevices::png,
+       width = 8, height = 8, dpi = 180, units = "in") 
